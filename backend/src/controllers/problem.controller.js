@@ -226,26 +226,20 @@ export const deleteProblem = async (req, res) => {
 
 export const getAllSolvedProblemsByUser = async (req, res) => {
   try {
-    const problems = await db.problem.findMany({
+    const solvedProblems = await db.solvedProblem.findMany({
       where: {
-        solvedBy: {
-          some: {
-            userId: req.user.id, // Filters problems solved by the current user
-          },
-        },
+        userId: req.user.id, // Filters solved problems by the current user
       },
       include: {
-        solvedBy: {
-          where: {
-            userId: req.user.id, // Includes only the current user's solved data
-          },
-        },
+        problem: true, // Includes the related problem details
       },
     });
 
-    if (!problems || problems.length === 0) {
+    if (!solvedProblems || solvedProblems.length === 0) {
       return res.status(404).json({ error: "No solved problems found for the user." });
     }
+
+    const problems = solvedProblems.map((solved) => solved.problem);
 
     return res.status(200).json({
       success: true,

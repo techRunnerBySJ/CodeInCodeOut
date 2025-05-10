@@ -11,6 +11,6 @@ problemRoutes.put('/update-problem/:id', authMiddleware, isAdmin, updateProblemB
 problemRoutes.delete('/delete-problem/:id', authMiddleware, isAdmin, deleteProblemById);
 problemRoutes.get('/get-problem-by-tag/:tag', authMiddleware, getProblemByTag);
 problemRoutes.get('/get-problem-by-difficulty/:difficulty', authMiddleware, getProblemByDifficulty);
-problemRoutes.get('/get-solved-problems', authMiddleware, getAllSolvedProblemsByUser);
+problemRoutes.get('/get-solved-problems-by-user', authMiddleware, getAllSolvedProblemsByUser);
 
 export default problemRoutes;
