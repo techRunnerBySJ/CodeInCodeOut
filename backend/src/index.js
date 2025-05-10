@@ -2,7 +2,7 @@ import express from "express"
 import dotenv from 'dotenv';
 import authRoutes from "./routes/auth.routes.js";
 import problemRoutes from "./routes/problem.routes.js";
-import submissionRoutes from "./routes/submissions.js";
+import submissionRoutes from "./routes/submissions.routes.js";
 
 
 const app = express();
