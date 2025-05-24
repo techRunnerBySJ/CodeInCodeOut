@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { BsStars } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 const problemsData = [
   {
@@ -110,11 +111,13 @@ export default function Problems() {
 
             {/* Status + Button */}
             <div className="flex items-center gap-4">
-              {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
-              <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
-                Solve
-              </button>
-            </div>
+  {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
+  <Link to={`/problem/${problem.id}`}>
+    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
+      Solve
+    </button>
+  </Link>
+</div>
           </div>
         ))}
       </div>
