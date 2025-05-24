@@ -198,6 +198,10 @@ const config = {
         "fromEnvVar": null,
         "value": "darwin-arm64",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -215,16 +219,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://codeincodeout:codeincodeout@localhost:5432/postgres"
+        "value": null
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ADMIN\n  USER\n}\n\nenum Difficulty {\n  EASY\n  MEDIUM\n  HARD\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String?\n  email     String   @unique\n  image     String?\n  role      UserRole @default(USER)\n  password  String\n  coins     Int      @default(0) // New field to track user coins\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  problems       Problem[]\n  solvedProblems SolvedProblem[]\n}\n\nmodel Problem {\n  id              String     @id @default(uuid())\n  title           String\n  description     String\n  difficultyLevel Difficulty\n  tags            String[]\n  userId          String\n  examples        Json\n  constraints     String\n  hints           String[] // Change from String? to String[]\n  editorial       String?\n  discussion      Json?\n\n  testcases          Json\n  codeSnippets       Json\n  referenceSolutions Json\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  solvedBy SolvedProblem[]\n}\n\nmodel SolvedProblem {\n  id        String   @id @default(uuid())\n  userId    String\n  problemId String\n  solvedAt  DateTime @default(now())\n\n  // Relationships\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n}\n",
-  "inlineSchemaHash": "b238a03009001ab005d33626c95499382beaa4885c10efb37d05290d74c584f2",
+  "inlineSchema": "generator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../src/generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nenum UserRole {\n  ADMIN\n  USER\n}\n\nenum Difficulty {\n  EASY\n  MEDIUM\n  HARD\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  name      String?\n  email     String   @unique\n  image     String?\n  role      UserRole @default(USER)\n  password  String\n  coins     Int      @default(0) // New field to track user coins\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  problems       Problem[]\n  solvedProblems SolvedProblem[]\n}\n\nmodel Problem {\n  id              String     @id @default(uuid())\n  title           String\n  description     String\n  difficultyLevel Difficulty\n  tags            String[]\n  userId          String\n  examples        Json\n  constraints     String\n  hints           String[] // Change from String? to String[]\n  editorial       String?\n  discussion      Json?\n\n  testcases          Json\n  codeSnippets       Json\n  referenceSolutions Json\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)\n  solvedBy SolvedProblem[]\n}\n\nmodel SolvedProblem {\n  id        String   @id @default(uuid())\n  userId    String\n  problemId String\n  solvedAt  DateTime @default(now())\n\n  // Relationships\n  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)\n  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)\n}\n",
+  "inlineSchemaHash": "8f744ef6e09f4266d5e46a128f3ffe25ca6323c0f598700ec7bb2aeb036ccb16",
   "copyEngine": true
 }
 
@@ -265,6 +270,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
 path.join(process.cwd(), "src/generated/prisma/libquery_engine-darwin-arm64.dylib.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "src/generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "src/generated/prisma/schema.prisma")
