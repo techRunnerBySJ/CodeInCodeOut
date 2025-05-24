@@ -9,6 +9,7 @@ import Discussion from './components/Discussion.jsx';
 import Premium from './components/Premium.jsx';
 import Profile from './components/Profile.jsx';
 import ProblemSolvingPage from './components/ProblemSolvingPage.jsx';
+import CreateProblem from './components/CreateProblem.jsx';
 
 export default function App() {
   const [showDialog, setShowDialog] = useState(false);
@@ -32,6 +33,7 @@ export default function App() {
         <Route path="/premium" element={<Premium />} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/problem/:id" element={<ProblemSolvingPage />} />
+        <Route path="/create-problem" element={<CreateProblem />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
