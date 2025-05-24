@@ -10,6 +10,7 @@ import Premium from './components/Premium.jsx';
 import Profile from './components/Profile.jsx';
 import ProblemSolvingPage from './components/ProblemSolvingPage.jsx';
 import CreateProblem from './components/CreateProblem.jsx';
+import AdminDashboard from './components/AdminDashboard.jsx';
 
 export default function App() {
   const [showDialog, setShowDialog] = useState(false);
@@ -34,6 +35,7 @@ export default function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/problem/:id" element={<ProblemSolvingPage />} />
         <Route path="/create-problem" element={<CreateProblem />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
