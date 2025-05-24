@@ -16,6 +16,8 @@ export const createProblem = async (req, res) => {
     testcases,
     codeSnippets,
     referenceSolutions,
+    hints,
+    discussion, // New field
   } = req.body;
 
   if (!testcases || testcases.length === 0) {
@@ -80,6 +82,8 @@ export const createProblem = async (req, res) => {
         testcases,
         codeSnippets,
         referenceSolutions,
+        hints,
+        discussion, // Save the discussion field
         userId: req.user.id,
       },
     });
@@ -159,6 +163,8 @@ export const updateProblemById = async (req, res) => {
     testcases,
     codeSnippets,
     referenceSolutions,
+    hints,
+    discussion, // New field
   } = req.body;
 
   try {
@@ -185,6 +191,8 @@ export const updateProblemById = async (req, res) => {
         testcases,
         codeSnippets,
         referenceSolutions,
+        hints,
+        discussion, // Update the discussion field
       },
     });
     return res.status(200).json({

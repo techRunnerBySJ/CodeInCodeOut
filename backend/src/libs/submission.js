@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { runCode } from "../utils/runCode.js";  // You need to implement this function for executing code
 
 // In-memory storage for submissions
-const submissions = {};
+export const submissions = {};
 
 // Custom language ID mapping
 export const getCustomLanguageId = (language) => {
