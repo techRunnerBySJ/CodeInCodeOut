@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar.jsx';
 import RegisterDialog from './RegisterDialog.jsx';
 import { FiCode, FiUser, FiStar } from 'react-icons/fi';
 
