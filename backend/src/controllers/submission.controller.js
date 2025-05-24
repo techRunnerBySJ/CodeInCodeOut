@@ -1,5 +1,183 @@
-import { submitBatch as submitBatchService, pollBatchResults } from "../libs/submission.js";  // Import from submission service
+import { submitBatch as submitBatchService, pollBatchResults, submissions } from "../libs/submission.js";  // Import from submission service
+import { getCustomLanguageId } from "../libs/submission.js";
+import { v4 as uuidv4 } from 'uuid';
+import { runCode } from "../utils/runCode.js";
+import { db } from "../libs/db.js";
 
+export const runProblem = async (req, res) => {
+  const { problemId, source_code, language } = req.body;
+
+  // Validate input
+  if (!problemId || !source_code || !language) {
+    return res.status(400).json({ error: "Invalid input. Please provide problemId, source_code, and language." });
+  }
+
+  try {
+    // Fetch the problem details from the database
+    const problem = await db.problem.findUnique({
+      where: { id: problemId },
+    });
+
+    if (!problem) {
+      return res.status(404).json({ error: "Problem not found." });
+    }
+
+    const { testcases } = problem;
+
+    if (!testcases || testcases.length === 0) {
+      return res.status(400).json({ error: "No test cases available for this problem." });
+    }
+
+    // Get the language ID for the user's selected language
+    const languageId = getCustomLanguageId(language);
+
+    if (!languageId) {
+      return res.status(400).json({ error: `Language ${language} is not supported.` });
+    }
+
+    // Prepare and execute the user's code for each test case
+    const results = await Promise.all(
+      testcases.map(async ({ input, output }) => {
+        const result = await runCode(source_code, languageId, input);
+
+        // Normalize outputs to avoid whitespace or formatting issues
+        const normalize = (str) => (str ? str.replace(/\r?\n|\r/g, "").trim() : "");
+
+        const actualOutput = normalize(result.stdout);
+        const expectedOutput = normalize(output);
+
+        return {
+          input,
+          expected_output: expectedOutput,
+          actual_output: actualOutput,
+          passed: actualOutput === expectedOutput,
+          error: result.stderr || null,
+        };
+      })
+    );
+
+    // Check if all test cases passed
+    const allPassed = results.every((test) => test.passed);
+
+    // Return the results
+    return res.status(200).json({
+      success: true,
+      message: allPassed ? "All test cases passed." : "Some test cases failed.",
+      allPassed,
+      results,
+    });
+  } catch (error) {
+    console.error("Error while running problem:", error);
+    return res.status(500).json({ error: "Error while running the problem." });
+  }
+};
+
+
+
+export const submitProblem = async (req, res) => {
+  const {
+    problemId,
+    source_code,
+    language,
+  } = req.body;
+
+  if (!problemId || !source_code || !language) {
+    return res.status(400).json({ error: "Invalid input. Please provide problemId, source_code, and language." });
+  }
+
+  try {
+    // Fetch the problem details
+    const problem = await db.problem.findUnique({
+      where: { id: problemId },
+    });
+
+    if (!problem) {
+      return res.status(404).json({ error: "Problem not found." });
+    }
+
+    const { testcases } = problem;
+
+    if (!testcases || testcases.length === 0) {
+      return res.status(400).json({ error: "No test cases available for this problem." });
+    }
+
+    // Get the language ID for the user's selected language
+    const languageId = getCustomLanguageId(language);
+
+    if (!languageId) {
+      return res.status(400).json({ error: `Language ${language} is not supported.` });
+    }
+
+    // Execute the user's code for each test case
+    const results = await Promise.all(
+      testcases.map(async ({ input, output }) => {
+        const result = await runCode(source_code, languageId, input);
+
+        const normalize = (str) => (str ? str.replace(/\r?\n|\r/g, "").trim() : "");
+
+        const actualOutput = normalize(result.stdout);
+        const expectedOutput = normalize(output);
+
+        return {
+          input,
+          expected_output: expectedOutput,
+          actual_output: actualOutput,
+          passed: actualOutput === expectedOutput,
+          error: result.stderr || null,
+        };
+      })
+    );
+
+    // Check if all test cases passed
+    const allPassed = results.every((test) => test.passed);
+
+    if (!allPassed) {
+      return res.status(400).json({
+        success: false,
+        message: "Some test cases failed.",
+        results,
+      });
+    }
+
+    // Check if the problem is already solved by the user
+    const alreadySolved = await db.solvedProblem.findFirst({
+      where: {
+        userId: req.user.id,
+        problemId,
+      },
+    });
+
+    if (alreadySolved) {
+      return res.status(400).json({ error: "Problem already solved by the user." });
+    }
+
+    // Award coins for solving the problem
+    const coinsEarned = 10; // Example: 10 coins per problem
+    await db.user.update({
+      where: { id: req.user.id },
+      data: {
+        coins: { increment: coinsEarned },
+      },
+    });
+
+    // Record the solved problem
+    await db.solvedProblem.create({
+      data: {
+        userId: req.user.id,
+        problemId,
+      },
+    });
+
+    return res.status(200).json({
+      success: true,
+      message: "Problem solved successfully. Coins awarded!",
+      coinsEarned,
+    });
+  } catch (error) {
+    console.error("Error while submitting problem:", error);
+    return res.status(500).json({ error: "Error while submitting the problem." });
+  }
+};
 // Handle batch submission requests
 export const submitBatch = async (submissionsArray) => {
     const tokens = submissionsArray.map(({ source_code, language_id, stdin, expected_output }) => {

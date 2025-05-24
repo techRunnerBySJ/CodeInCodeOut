@@ -1,5 +1,6 @@
 import express from "express";
 import { submitBatch, getBatchResults, runProblem, submitProblem } from "../controllers/submission.controller.js";
+import { authMiddleware } from "../middlewares/auth.middleware.js";
 
 const submissionRoutes = express.Router();
 
@@ -11,6 +12,6 @@ submissionRoutes.get("/batch", getBatchResults);
 
 submissionRoutes.post("/run", runProblem);
 
-submissionRoutes.post("/submit", submitProblem);
+submissionRoutes.post("/submit", authMiddleware, submitProblem);
 
 export default submissionRoutes;
