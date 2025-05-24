@@ -7,6 +7,8 @@ import Navbar from './components/Navbar.jsx';
 import Contests from './components/Contests.jsx';
 import Discussion from './components/Discussion.jsx';
 import Premium from './components/Premium.jsx';
+import Profile from './components/Profile.jsx';
+import ProblemSolvingPage from './components/ProblemSolvingPage.jsx';
 
 export default function App() {
   const [showDialog, setShowDialog] = useState(false);
@@ -28,6 +30,8 @@ export default function App() {
         <Route path="/contests" element={<Contests />} />
         <Route path="/discussion" element={<Discussion />} />
         <Route path="/premium" element={<Premium />} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/problem/:id" element={<ProblemSolvingPage />} />
         {/* Add more routes as needed */}
       </Routes>
     </Router>
