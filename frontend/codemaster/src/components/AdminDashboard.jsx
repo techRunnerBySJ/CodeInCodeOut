@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const mockProblems = [
   {
@@ -20,9 +21,19 @@ const mockProblems = [
 ];
 
 export default function AdminDashboard() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e3a8a] text-white px-4 md:px-20 py-10">
-      <h2 className="text-3xl font-bold mb-8">Admin Dashboard</h2>
+      <div className="flex items-center justify-between mb-8">
+        <h2 className="text-3xl font-bold">Admin Dashboard</h2>
+        <button
+          onClick={() => navigate('/create-problem')}
+          className="bg-green-600 hover:bg-green-700 px-5 py-2 rounded text-white font-semibold"
+        >
+          + Create Problem
+        </button>
+      </div>
 
       {/* Stats */}
       <div className="grid md:grid-cols-3 gap-6 mb-10">
