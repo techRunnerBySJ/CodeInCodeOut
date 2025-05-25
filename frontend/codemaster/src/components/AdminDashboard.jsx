@@ -91,14 +91,14 @@ export default function AdminDashboard() {
                       <td className="p-3 border border-gray-700">{problem.solvedByCount}</td>
                       <td className="p-3 border border-gray-700">{problem.inProgressCount}</td>
                       <td className="p-3 border border-gray-700">{new Date(problem.createdAt).toLocaleDateString()}</td>
-                      <td className="p-3 border border-gray-700 flex space-x-4">
+                      <td className="p-3 border border-gray-700">
                         <button
                           onClick={() =>
                             navigate(`/create-problem`, {
                               state: { problem: problem, mode: 'view' },
                             })
                           }
-                          className="text-blue-500 hover:text-blue-700"
+                          className="text-blue-500 hover:text-blue-700 mr-3"
                         >
                           <FaEye />
                         </button>
