@@ -1,27 +1,68 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 export default function CreateProblem() {
 
-  const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    difficultyLevel: 'Easy',
-    tags: [],
-    examples: JSON.stringify([{ input: '', output: '', explanation: '' }], null, 2),
-    constraints: [''],
-    testcases: [{ input: '', output: '' }],
-    codeSnippets: [{ language: 'JavaScript', code: '' }],
-    referenceSolutions: {},
-    hints: [],
-    discussion: JSON.stringify([], null, 2),
-  });
+
+  const normalizeLanguage = (lang) => {
+    const map = {
+      javascript: 'JavaScript',
+      python: 'Python',
+      java: 'Java',
+    };
+    return map[lang.toLowerCase()] || lang;
+  };
+  
 
   const [errors, setErrors] = useState({});
   const API_BASE_URL = process.env.REACT_APP_API_URL;
+  const location = useLocation();
+  const problem = location.state?.problem;
+  const mode = location.state?.mode || 'create'; // 'view', 'edit', or 'create'
+  const [formData, setFormData] = useState(() => {
+    if (problem) {
+      return {
+        title: problem.title || '',
+        description: problem.description || '',
+        difficultyLevel: problem.difficultyLevel
+          ? problem.difficultyLevel.charAt(0).toUpperCase() + problem.difficultyLevel.slice(1).toLowerCase()
+          : 'Easy', // Normalize difficultyLevel
+        tags: problem.tags || [],
+        examples: JSON.stringify(problem.examples || [{ input: '', output: '', explanation: '' }], null, 2),
+        constraints: problem.constraints || [''],
+        testcases: problem.testcases || [{ input: '', output: '' }],
+        codeSnippets: (problem.codeSnippets || []).map((cs) => ({
+          language: normalizeLanguage(cs.language),
+          code: cs.code,
+        })),
+        referenceSolutions: problem.referenceSolutions || {},
+        hints: problem.hints || [],
+        discussion: JSON.stringify(problem.discussion || [], null, 2),
+      };
+    }
+    return {
+      title: '',
+      description: '',
+      difficultyLevel: 'Easy', // Default to normalized value
+      tags: [],
+      examples: JSON.stringify([{ input: '', output: '', explanation: '' }], null, 2),
+      constraints: [''],
+      testcases: [{ input: '', output: '' }],
+      codeSnippets: [{ language: 'JavaScript', code: '' }],
+      referenceSolutions: {},
+      hints: [],
+      discussion: JSON.stringify([], null, 2),
+    };
+  });
 
   const handleChange = (field, value) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({
+      ...prev,
+      [field]: field === 'difficultyLevel'
+        ? value.charAt(0).toUpperCase() + value.slice(1).toLowerCase()
+        : value,
+    }));
   };
 
   const handleArrayChange = (field, index, value) => {
@@ -93,13 +134,26 @@ export default function CreateProblem() {
     if (Object.keys(formData.referenceSolutions).length === 0) {
       newErrors.referenceSolutions = 'At least one reference solution is required.';
     }
+  
+    // Normalize difficultyLevel and validate
+    const validDifficulties = ["Easy", "Medium", "Hard"];
+    const normalizedDifficulty = formData.difficultyLevel.charAt(0).toUpperCase() + formData.difficultyLevel.slice(1).toLowerCase();
+    if (!validDifficulties.includes(normalizedDifficulty)) {
+      newErrors.difficultyLevel = 'Invalid difficulty level selected.';
+    }
+  
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!validateForm()) return;
+    console.log('Form Data:', formData); // Debug log
+  
+    if (!validateForm()) {
+      console.log('Validation Failed:', errors); // Debug log
+      return;
+    }
   
     // Ensure difficultyLevel is valid
     const validDifficulties = ["Easy", "Medium", "Hard"];
@@ -108,6 +162,7 @@ export default function CreateProblem() {
         ...prev,
         difficultyLevel: "Invalid difficulty level selected.",
       }));
+      console.log('Invalid Difficulty Level:', formData.difficultyLevel); // Debug log
       return;
     }
   
@@ -129,6 +184,8 @@ export default function CreateProblem() {
       discussion: JSON.parse(formData.discussion), // Parse discussion from JSON string
     };
   
+    console.log('Payload:', payload); // Debug log
+  
     try {
       const response = await axios.post(`${API_BASE_URL}/api/v1/problems/create-problem`, payload, {
         headers: {
@@ -138,14 +195,17 @@ export default function CreateProblem() {
       });
       console.log('Response:', response.data);
     } catch (error) {
-      console.error('Error submitting problem:', error);
+      console.error('Error submitting problem:', error.response || error.message);
     }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0f172a] to-[#1e3a8a] text-white px-4 md:px-20 py-10">
       <div className="max-w-4xl mx-auto bg-[#1e293b] p-8 rounded-xl shadow-lg">
-        <h2 className="text-2xl font-bold mb-6">Create New Problem</h2>
+      <h2 className="text-2xl font-bold mb-6">
+  {mode === 'view' ? 'View Problem' : mode === 'edit' ? 'Edit Problem' : 'Create New Problem'}
+</h2>
+
         <form className="space-y-6" onSubmit={handleSubmit}>
           {/* Title */}
           <div>
@@ -155,6 +215,7 @@ export default function CreateProblem() {
               placeholder="Title (e.g., Two Sum Problem)"
               value={formData.title}
               onChange={(e) => handleChange('title', e.target.value)}
+              disabled={mode === 'view'}
             />
             {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
           </div>
@@ -167,6 +228,7 @@ export default function CreateProblem() {
               rows={4}
               value={formData.description}
               onChange={(e) => handleChange('description', e.target.value)}
+              disabled={mode === 'view'}
             />
             {errors.description && <p className="text-red-500 text-sm">{errors.description}</p>}
           </div>
@@ -176,6 +238,7 @@ export default function CreateProblem() {
             className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600"
             value={formData.difficultyLevel}
             onChange={(e) => handleChange('difficultyLevel', e.target.value)}
+            disabled={mode === 'view'}
           >
             <option value="easy">Easy</option>
             <option value="medium">Medium</option>
@@ -192,17 +255,19 @@ export default function CreateProblem() {
                   placeholder={`Tag ${index + 1}`}
                   value={tag}
                   onChange={(e) => handleArrayChange('tags', index, e.target.value)}
+                  disabled={mode === 'view'}
                 />
                 <button
                   type="button"
                   className="bg-red-600 px-2 py-1 rounded text-white"
                   onClick={() => removeFromArray('tags', index)}
+                disabled={mode === 'view'}
                 >
                   Delete
                 </button>
               </div>
             ))}
-            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('tags')}>
+            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('tags')} disabled={mode === 'view'}>
               + Add Tag
             </button>
           </div>
@@ -216,6 +281,7 @@ export default function CreateProblem() {
               rows={6}
               value={formData.examples}
               onChange={(e) => handleChange('examples', e.target.value)}
+              disabled={mode === 'view'}
             />
             {errors.examples && <p className="text-red-500 text-sm">{errors.examples}</p>}
           </div>
@@ -230,17 +296,19 @@ export default function CreateProblem() {
                   placeholder={`Constraint ${index + 1}`}
                   value={constraint}
                   onChange={(e) => handleArrayChange('constraints', index, e.target.value)}
+                  disabled={mode === 'view'}
                 />
                 <button
                   type="button"
                   className="bg-red-600 px-2 py-1 rounded text-white"
                   onClick={() => removeFromArray('constraints', index)}
+                  disabled={mode === 'view'}
                 >
                   Delete
                 </button>
               </div>
             ))}
-            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('constraints')}>
+            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('constraints')} disabled={mode === 'view'}>
               + Add Constraint
             </button>
             {errors.constraints && <p className="text-red-500 text-sm">{errors.constraints}</p>}
@@ -256,17 +324,20 @@ export default function CreateProblem() {
                   placeholder={`Input ${index + 1}`}
                   value={testcase.input}
                   onChange={(e) => handleTestCaseChange(index, 'input', e.target.value)}
+                  disabled={mode === 'view'}
                 />
                 <input
                   className="w-full p-2 rounded bg-gray-800 text-white border border-gray-600"
                   placeholder={`Output ${index + 1}`}
                   value={testcase.output}
                   onChange={(e) => handleTestCaseChange(index, 'output', e.target.value)}
+                  disabled={mode === 'view'}
                 />
                 <button
                   type="button"
                   className="bg-red-600 px-2 py-1 rounded text-white"
                   onClick={() => removeFromArray('testcases', index)}
+                  disabled={mode === 'view'}
                 >
                   Delete
                 </button>
@@ -276,6 +347,7 @@ export default function CreateProblem() {
               type="button"
               className="bg-blue-600 px-3 py-1 rounded"
               onClick={() => addToArray('testcases', { input: '', output: '' })}
+              disabled={mode === 'view'}
             >
               + Add Test Case
             </button>
@@ -292,6 +364,7 @@ export default function CreateProblem() {
                     className="w-1/3 p-2 rounded bg-gray-800 text-white border border-gray-600"
                     value={snippet.language}
                     onChange={(e) => handleCodeSnippetChange(index, 'language', e.target.value)}
+                    disabled={mode === 'view'}
                   >
                     <option value="JavaScript">JavaScript</option>
                     <option value="Python">Python</option>
@@ -303,6 +376,7 @@ export default function CreateProblem() {
                     type="button"
                     className="bg-red-600 px-2 py-1 rounded text-white"
                     onClick={() => removeFromArray('codeSnippets', index)}
+                    disabled={mode === 'view'}
                   >
                     Delete
                   </button>
@@ -313,6 +387,7 @@ export default function CreateProblem() {
                   rows={4}
                   value={snippet.code}
                   onChange={(e) => handleCodeSnippetChange(index, 'code', e.target.value)}
+                  disabled={mode === 'view'}
                 />
               </div>
             ))}
@@ -320,6 +395,7 @@ export default function CreateProblem() {
               type="button"
               className="bg-blue-600 px-3 py-1 rounded"
               onClick={() => addToArray('codeSnippets', { language: 'JavaScript', code: '' })}
+              disabled={mode === 'view'}
             >
               + Add Code Snippet
             </button>
@@ -336,17 +412,19 @@ export default function CreateProblem() {
                   placeholder={`Hint ${index + 1}`}
                   value={hint}
                   onChange={(e) => handleArrayChange('hints', index, e.target.value)}
+                  disabled={mode === 'view'}
                 />
                 <button
                   type="button"
                   className="bg-red-600 px-2 py-1 rounded text-white"
                   onClick={() => removeFromArray('hints', index)}
+                  disabled={mode === 'view'}
                 >
                   Delete
                 </button>
               </div>
             ))}
-            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('hints')}>
+            <button type="button" className="bg-blue-600 px-3 py-1 rounded" onClick={() => addToArray('hints')} disabled={mode === 'view'}>
               + Add Hint
             </button>
           </div>
@@ -359,6 +437,7 @@ export default function CreateProblem() {
               rows={4}
               value={formData.discussion}
               onChange={(e) => handleChange('discussion', e.target.value)}
+              disabled={mode === 'view'}
             />
           </div>
 
@@ -370,7 +449,8 @@ export default function CreateProblem() {
                 <div className="flex items-center space-x-2">
                 <select
   className="w-1/3 p-2 rounded bg-gray-800 text-white border border-gray-600"
-  value={language} // Ensure this is the correct language key
+  value={language} 
+  disabled={mode === 'view'}
   onChange={(e) => {
     const updated = { ...formData.referenceSolutions };
     const newLanguage = e.target.value;
@@ -389,13 +469,12 @@ export default function CreateProblem() {
   <option value="JavaScript">JavaScript</option>
   <option value="Python">Python</option>
   <option value="Java">Java</option>
-  <option value="C++">C++</option>
-  <option value="C#">C#</option>
 </select>
                   <button
                     type="button"
                     className="bg-red-600 px-2 py-1 rounded text-white"
                     onClick={() => removeReferenceSolution(language)}
+                    disabled={mode === 'view'}
                   >
                     Delete
                   </button>
@@ -404,15 +483,17 @@ export default function CreateProblem() {
                   className="w-full p-2 font-mono rounded bg-gray-800 text-white border border-gray-600 mt-2"
                   placeholder={`Code for ${language}`}
                   rows={4}
-                  value={code}
+                  value={typeof code === 'string' ? code : JSON.stringify(code, null, 2)} // Ensure it's a string
                   onChange={(e) => handleReferenceSolutionChange(language, e.target.value)}
+                  disabled={mode === 'view'}
                 />
               </div>
             ))}
             <button
               type="button"
               className="bg-blue-600 px-3 py-1 rounded"
-              onClick={() => handleReferenceSolutionChange('JavaScript', '')} // Default to JavaScript
+              onClick={() => handleReferenceSolutionChange('JavaScript', '')}
+              disabled={mode === 'view'}
             >
               + Add Reference Solution
             </button>
@@ -422,6 +503,7 @@ export default function CreateProblem() {
           <button
             type="submit"
             className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded text-white font-semibold"
+            
           >
             Create Problem
           </button>
