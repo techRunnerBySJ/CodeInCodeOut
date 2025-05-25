@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home.jsx';
 import RegisterDialog from './components/RegisterDialog.jsx';
 import Problems from './components/Problems.jsx';
@@ -14,29 +14,37 @@ import AdminDashboard from './components/AdminDashboard.jsx';
 
 export default function App() {
   const [showDialog, setShowDialog] = useState(false);
+  const [role, setRole] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const storedRole = localStorage.getItem('role');
+    setRole(storedRole);
+    setIsLoading(false); // Set loading to false after fetching the role
+  }, []);
+
+  if (isLoading) {
+    // Show a loading indicator while the role is being fetched
+    return <div>Loading...</div>;
+  }
 
   return (
     <Router>
-      {/* ✅ Always visible */}
       <Navbar onOpenDialog={() => setShowDialog(true)} />
-
-      {/* ✅ Conditional Dialog */}
       {showDialog && <RegisterDialog onClose={() => setShowDialog(false)} />}
-
       <Routes>
-        <Route
-          path="/"
-          element={<Home onOpenDialog={() => setShowDialog(true)} />}
-        />
+        <Route path="/" element={<Home onOpenDialog={() => setShowDialog(true)} />} />
         <Route path="/problems" element={<Problems />} />
         <Route path="/contests" element={<Contests />} />
         <Route path="/discussion" element={<Discussion />} />
         <Route path="/premium" element={<Premium />} />
-        <Route path="/profile" element={<Profile/>} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/problem/:id" element={<ProblemSolvingPage />} />
         <Route path="/create-problem" element={<CreateProblem />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        {/* Add more routes as needed */}
+        <Route
+          path="/admin-dashboard"
+          element={role === 'ADMIN' ? <AdminDashboard /> : <Navigate to="/" />}
+        />
       </Routes>
     </Router>
   );
