@@ -503,7 +503,7 @@ export default function CreateProblem() {
           <button
             type="submit"
             className="bg-green-600 hover:bg-green-700 px-6 py-2 rounded text-white font-semibold"
-            
+            disabled={mode === 'view'}
           >
             Create Problem
           </button>
