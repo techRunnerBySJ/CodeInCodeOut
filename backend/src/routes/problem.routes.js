@@ -1,6 +1,6 @@
 import express from 'express';
 import { authMiddleware, isAdmin } from '../middlewares/auth.middleware.js';
-import { createProblem, deleteProblemById, getAllProblems, getAllSolvedProblemsByUser, getProblemByDifficulty, getProblemById, getProblemByTag, updateProblemById } from '../controllers/problem.controller.js';
+import { createProblem, deleteProblemById, getAllProblems, getAllSolvedProblemsByUser, getProblemByDifficulty, getProblemById, getProblemByTag, getProblemsByCategories, updateProblemById } from '../controllers/problem.controller.js';
 
 const problemRoutes = express.Router();
 
@@ -12,5 +12,6 @@ problemRoutes.delete('/delete-problem/:id', authMiddleware, isAdmin, deleteProbl
 problemRoutes.get('/get-problem-by-tag/:tag', authMiddleware, getProblemByTag);
 problemRoutes.get('/get-problem-by-difficulty/:difficulty', authMiddleware, getProblemByDifficulty);
 problemRoutes.get('/get-solved-problems-by-user', authMiddleware, getAllSolvedProblemsByUser);
+problemRoutes.get('/get-problems-by-categories', authMiddleware, getProblemsByCategories);
 
 export default problemRoutes;

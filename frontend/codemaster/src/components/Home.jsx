@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RegisterDialog from './RegisterDialog.jsx';
 import { FiCode, FiUser, FiStar } from 'react-icons/fi';
+import axios from 'axios';
+import { FaAd, FaCode } from 'react-icons/fa';
 
 export default function Home({ onOpenDialog }) {
   const [showDialog, setShowDialog] = useState(false);
-
+  const [categories, setCategories] = useState([]); // State to store categories
+  const BASE_API_URL = process.env.REACT_APP_API_URL; // Base API URL
   const handleStartCoding = async () => {
     const isLoggedIn = await fakeLoginCheck();
     if (!isLoggedIn) {
@@ -18,6 +21,24 @@ export default function Home({ onOpenDialog }) {
     // Replace with real login logic
     return false;
   };
+
+  // Fetch categories from the API
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${BASE_API_URL}/api/v1/problems/get-problems-by-categories`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`, // Add auth token if required
+          },
+        });
+        setCategories(response.data.categories); // Set categories from API response
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   return (
     <div className="bg-gradient-to-r from-[#0f172a] to-[#1e3a8a] min-h-screen text-white">
@@ -80,20 +101,19 @@ export default function Home({ onOpenDialog }) {
       <div className="mt-24 px-4 md:px-20 text-center mb-20">
         <h2 className="text-3xl font-bold mb-10">Problem Categories</h2>
         <div className="grid md:grid-cols-4 gap-6">
-          {[
-            { name: 'Arrays', count: 45, difficulty: 'Easy', color: 'bg-green-600' },
-            { name: 'Dynamic Programming', count: 32, difficulty: 'Hard', color: 'bg-red-600' },
-            { name: 'Trees', count: 28, difficulty: 'Medium', color: 'bg-yellow-500' },
-            { name: 'Graphs', count: 24, difficulty: 'Hard', color: 'bg-red-600' },
-          ].map((cat, i) => (
-            <div key={i} className="bg-[#1e293b] p-6 rounded-xl text-left">
-              <h3 className="text-xl font-bold mb-2">{cat.name}</h3>
-              <p className="text-gray-300 mb-3">{cat.count} problems</p>
-              <span className={`text-white text-xs font-semibold px-3 py-1 rounded-full ${cat.color}`}>
-                {cat.difficulty}
-              </span>
-            </div>
-          ))}
+          {categories.length > 0 ? (
+            categories.map((cat, i) => (
+              <div key={i} className="bg-[#1e293b] p-6 rounded-xl text-left">
+                <h3 className="text-xl font-bold mb-2 text-white-400"><FaCode className="mr-2 text-blue-400"/>{cat.tag}</h3>
+                <p className="text-gray-300 mb-3 text-sm text-gray-400">{cat.count} problems</p>
+                {/* <span className="text-white text-xs font-semibold px-3 py-1 rounded-full bg-blue-600">
+                  Category
+                </span> */}
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400">Loading categories...</p>
+          )}
         </div>
       </div>
 

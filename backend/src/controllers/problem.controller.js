@@ -349,3 +349,38 @@ export const getProblemByTag = async (req, res) => {
     return res.status(500).json({ error: "Failed to fetch problems by tag." });
   }
 };
+
+export const getProblemsByCategories = async (req, res) => {
+  try {
+    const problems = await db.problem.findMany();
+
+    if (!problems || problems.length === 0) {
+      return res.status(404).json({ error: "No problems found." });
+    }
+
+    // Group problems by tags and count them
+    const categories = problems.reduce((acc, problem) => {
+      problem.tags.forEach((tag) => {
+        if (!acc[tag]) {
+          acc[tag] = 0;
+        }
+        acc[tag]++;
+      });
+      return acc;
+    }, {});
+
+    const categoriesArray = Object.entries(categories).map(([tag, count]) => ({
+      tag,
+      count,
+    }));
+
+    return res.status(200).json({
+      success: true,
+      message: "Categories fetched successfully.",
+      categories: categoriesArray,
+    });
+  } catch (error) {
+    console.error("Error fetching problems by categories:", error);
+    return res.status(500).json({ error: "Failed to fetch problems by categories." });
+  }
+};
