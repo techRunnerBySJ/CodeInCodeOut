@@ -18,14 +18,24 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const storedRole = localStorage.getItem('role');
-    setRole(storedRole);
-    setIsLoading(false); // Set loading to false after fetching the role
+    const fetchRole = async () => {
+      setIsLoading(true); // Start loading
+      try {
+        const storedRole = localStorage.getItem('role');
+        setRole(storedRole);
+      } catch (error) {
+        console.error('Error fetching role:', error);
+      } finally {
+        setIsLoading(false); // Stop loading
+      }
+    };
+
+    fetchRole();
   }, []);
 
   if (isLoading) {
     // Show a loading indicator while the role is being fetched
-    return <div>Loading...</div>;
+    return <div className="text-center text-xl font-semibold text-yellow-400">Loading...</div>;
   }
 
   return (

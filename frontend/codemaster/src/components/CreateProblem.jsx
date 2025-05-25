@@ -13,8 +13,7 @@ export default function CreateProblem() {
     };
     return map[lang.toLowerCase()] || lang;
   };
-  
-
+  const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const API_BASE_URL = process.env.REACT_APP_API_URL;
   const location = useLocation();
@@ -166,27 +165,25 @@ export default function CreateProblem() {
       return;
     }
   
-    // Transform formData to match the desired payload format
     const payload = {
       title: formData.title,
       description: formData.description,
-      difficultyLevel: formData.difficultyLevel.toUpperCase(), // Convert to uppercase
+      difficultyLevel: formData.difficultyLevel.toUpperCase(),
       tags: formData.tags,
-      examples: JSON.parse(formData.examples), // Parse examples from JSON string
+      examples: JSON.parse(formData.examples),
       constraints: formData.constraints,
       testcases: formData.testcases,
       codeSnippets: formData.codeSnippets.map((snippet) => ({
-        language: snippet.language.toLowerCase(), // Convert language to lowercase
+        language: snippet.language.toLowerCase(),
         code: snippet.code,
       })),
       referenceSolutions: formData.referenceSolutions,
       hints: formData.hints,
-      discussion: JSON.parse(formData.discussion), // Parse discussion from JSON string
+      discussion: JSON.parse(formData.discussion),
     };
   
-    console.log('Payload:', payload); // Debug log
-  
     try {
+      setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/api/v1/problems/create-problem`, payload, {
         headers: {
           'Content-Type': 'application/json',
@@ -197,6 +194,22 @@ export default function CreateProblem() {
     } catch (error) {
       console.error('Error submitting problem:', error.response || error.message);
     }
+    setLoading(false);
+    // Reset form after submission
+    setFormData({
+      title: '',
+      description: '',
+      difficultyLevel: 'Easy',
+      tags: [],
+      examples: JSON.stringify([{ input: '', output: '', explanation: '' }], null, 2),
+      constraints: [''],
+      testcases: [{ input: '', output: '' }],
+      codeSnippets: [{ language: 'JavaScript', code: '' }],
+      referenceSolutions: {},
+      hints: [],
+      discussion: JSON.stringify([], null, 2),
+    });
+    setErrors({});
   };
 
   return (
