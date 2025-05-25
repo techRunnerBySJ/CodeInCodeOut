@@ -174,7 +174,24 @@ export default function Problems() {
               {/* Status + Button */}
               <div className="flex items-center gap-4 ml-4">
                 {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
-                <Link to={`/problem/${problem.id}`}>
+                <Link 
+                  to={`/problem/${problem.id}`}
+                  state={{ 
+                    problemData: {
+                      id: problem.id,
+                      title: problem.title,
+                      difficulty: problem.difficulty,
+                      description: problem.description,
+                      examples: problem.examples,
+                      constraints: problem.constraints,
+                      testcases: problem.testcases,
+                      codeSnippets: problem.codeSnippets,
+                      referenceSolutions: problem.referenceSolutions,
+                      hints: problem.hints,
+                      discussion: problem.discussion
+                    }
+                  }}
+                >
                   <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
                     Solve
                   </button>

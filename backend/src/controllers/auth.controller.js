@@ -177,7 +177,6 @@ export const me = async (req, res) => {
                 coins: user.coins,
                 badges: user.badges,
                 createdAt: user.createdAt,
-                streak: user.streak,
             },
             stats: {
                 totalSolved,

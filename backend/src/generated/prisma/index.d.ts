@@ -1165,10 +1165,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateOutputType = {
     coins: number | null
+    streak: number | null
   }
 
   export type UserSumAggregateOutputType = {
     coins: number | null
+    streak: number | null
   }
 
   export type UserMinAggregateOutputType = {
@@ -1179,6 +1181,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     password: string | null
     coins: number | null
+    streak: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1191,6 +1194,7 @@ export namespace Prisma {
     role: $Enums.UserRole | null
     password: string | null
     coins: number | null
+    streak: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1203,6 +1207,8 @@ export namespace Prisma {
     role: number
     password: number
     coins: number
+    streak: number
+    badges: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1211,10 +1217,12 @@ export namespace Prisma {
 
   export type UserAvgAggregateInputType = {
     coins?: true
+    streak?: true
   }
 
   export type UserSumAggregateInputType = {
     coins?: true
+    streak?: true
   }
 
   export type UserMinAggregateInputType = {
@@ -1225,6 +1233,7 @@ export namespace Prisma {
     role?: true
     password?: true
     coins?: true
+    streak?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1237,6 +1246,7 @@ export namespace Prisma {
     role?: true
     password?: true
     coins?: true
+    streak?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1249,6 +1259,8 @@ export namespace Prisma {
     role?: true
     password?: true
     coins?: true
+    streak?: true
+    badges?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1348,6 +1360,8 @@ export namespace Prisma {
     role: $Enums.UserRole
     password: string
     coins: number
+    streak: number
+    badges: JsonValue
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -1379,6 +1393,8 @@ export namespace Prisma {
     role?: boolean
     password?: boolean
     coins?: boolean
+    streak?: boolean
+    badges?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     problems?: boolean | User$problemsArgs<ExtArgs>
@@ -1394,6 +1410,8 @@ export namespace Prisma {
     role?: boolean
     password?: boolean
     coins?: boolean
+    streak?: boolean
+    badges?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1406,6 +1424,8 @@ export namespace Prisma {
     role?: boolean
     password?: boolean
     coins?: boolean
+    streak?: boolean
+    badges?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1418,11 +1438,13 @@ export namespace Prisma {
     role?: boolean
     password?: boolean
     coins?: boolean
+    streak?: boolean
+    badges?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "coins" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "coins" | "streak" | "badges" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     problems?: boolean | User$problemsArgs<ExtArgs>
     solvedProblems?: boolean | User$solvedProblemsArgs<ExtArgs>
@@ -1445,6 +1467,8 @@ export namespace Prisma {
       role: $Enums.UserRole
       password: string
       coins: number
+      streak: number
+      badges: Prisma.JsonValue
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1879,6 +1903,8 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'UserRole'>
     readonly password: FieldRef<"User", 'String'>
     readonly coins: FieldRef<"User", 'Int'>
+    readonly streak: FieldRef<"User", 'Int'>
+    readonly badges: FieldRef<"User", 'Json'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -4609,6 +4635,8 @@ export namespace Prisma {
     role: 'role',
     password: 'password',
     coins: 'coins',
+    streak: 'streak',
+    badges: 'badges',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -4679,14 +4707,6 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -4694,6 +4714,14 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -4744,6 +4772,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -4768,20 +4810,6 @@ export namespace Prisma {
    * Reference to a field of type 'Difficulty[]'
    */
   export type ListEnumDifficultyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Difficulty[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Json'
-   */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
-    
-
-
-  /**
-   * Reference to a field of type 'QueryMode'
-   */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -4813,6 +4841,8 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
     coins?: IntFilter<"User"> | number
+    streak?: IntFilter<"User"> | number
+    badges?: JsonFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     problems?: ProblemListRelationFilter
@@ -4827,6 +4857,8 @@ export namespace Prisma {
     role?: SortOrder
     password?: SortOrder
     coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     problems?: ProblemOrderByRelationAggregateInput
@@ -4844,6 +4876,8 @@ export namespace Prisma {
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
     coins?: IntFilter<"User"> | number
+    streak?: IntFilter<"User"> | number
+    badges?: JsonFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     problems?: ProblemListRelationFilter
@@ -4858,6 +4892,8 @@ export namespace Prisma {
     role?: SortOrder
     password?: SortOrder
     coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -4878,6 +4914,8 @@ export namespace Prisma {
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     password?: StringWithAggregatesFilter<"User"> | string
     coins?: IntWithAggregatesFilter<"User"> | number
+    streak?: IntWithAggregatesFilter<"User"> | number
+    badges?: JsonWithAggregatesFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -5056,6 +5094,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
@@ -5070,6 +5110,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
@@ -5084,6 +5126,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
@@ -5098,6 +5142,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
@@ -5112,6 +5158,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -5124,6 +5172,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5136,6 +5186,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -5370,6 +5422,29 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntFilter<$PrismaModel> | number
   }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -5415,12 +5490,15 @@ export namespace Prisma {
     role?: SortOrder
     password?: SortOrder
     coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserAvgOrderByAggregateInput = {
     coins?: SortOrder
+    streak?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5431,6 +5509,7 @@ export namespace Prisma {
     role?: SortOrder
     password?: SortOrder
     coins?: SortOrder
+    streak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5443,12 +5522,14 @@ export namespace Prisma {
     role?: SortOrder
     password?: SortOrder
     coins?: SortOrder
+    streak?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type UserSumOrderByAggregateInput = {
     coins?: SortOrder
+    streak?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5512,6 +5593,32 @@ export namespace Prisma {
     _min?: NestedIntFilter<$PrismaModel>
     _max?: NestedIntFilter<$PrismaModel>
   }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -5540,29 +5647,6 @@ export namespace Prisma {
     hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
     hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
     isEmpty?: boolean
-  }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -5642,32 +5726,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDifficultyFilter<$PrismaModel>
     _max?: NestedEnumDifficultyFilter<$PrismaModel>
-  }
-  export type JsonWithAggregatesFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
-
-  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedJsonFilter<$PrismaModel>
-    _max?: NestedJsonFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6083,6 +6141,29 @@ export namespace Prisma {
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatFilter<$PrismaModel> | number
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -6113,29 +6194,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumDifficultyFilter<$PrismaModel>
     _max?: NestedEnumDifficultyFilter<$PrismaModel>
-  }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
-
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -6303,6 +6361,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     solvedProblems?: SolvedProblemCreateNestedManyWithoutUserInput
@@ -6316,6 +6376,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     solvedProblems?: SolvedProblemUncheckedCreateNestedManyWithoutUserInput
@@ -6367,6 +6429,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     solvedProblems?: SolvedProblemUpdateManyWithoutUserNestedInput
@@ -6380,6 +6444,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     solvedProblems?: SolvedProblemUncheckedUpdateManyWithoutUserNestedInput
@@ -6409,6 +6475,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemCreateNestedManyWithoutUserInput
@@ -6422,6 +6490,8 @@ export namespace Prisma {
     role?: $Enums.UserRole
     password: string
     coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: Date | string
     updatedAt?: Date | string
     problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
@@ -6494,6 +6564,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUpdateManyWithoutUserNestedInput
@@ -6507,6 +6579,8 @@ export namespace Prisma {
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
     coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput

@@ -128,6 +128,8 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   password: 'password',
   coins: 'coins',
+  streak: 'streak',
+  badges: 'badges',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -177,15 +179,15 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
 };
 exports.UserRole = exports.$Enums.UserRole = {
   ADMIN: 'ADMIN',
