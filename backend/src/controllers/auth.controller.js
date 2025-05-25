@@ -67,36 +67,32 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
     const { email, password } = req.body;
-    try{
+    try {
         const user = await db.user.findUnique({
             where: { email },
         });
         if (!user) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-        // Check password
 
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Invalid email or password' });
         }
-        // Generate token
+
         const token = jwt.sign(
             { id: user.id },
             process.env.JWT_SECRET,
-            {
-                expiresIn: '7d',
-            },
+            { expiresIn: '7d' }
         );
-        // Save token
+
         res.cookie('token', token, {
             httpOnly: true,
             secure: process.env.NODE_ENV === 'production',
             sameSite: 'strict',
-            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
-        console.log('User logged in:', res.cookie);
-        // Send response
+
         res.status(200).json({
             success: true,
             message: 'Login successful',
@@ -104,19 +100,17 @@ export const login = async (req, res) => {
                 id: user.id,
                 email: user.email,
                 name: user.name,
-                image: user.image,
-                role: user.role
+                image: user.image, // Include profile picture
+                role: user.role,
+                coins: user.coins, // Include coins
             },
             token,
-        }
-            
-        );
-    }
-    catch (error) {
+        });
+    } catch (error) {
         console.error('Error logging in:', error);
         res.status(500).json({ message: error.message });
     }
-}
+};
 
 export const logout = async (req, res) => {
     try {
@@ -136,15 +130,41 @@ export const logout = async (req, res) => {
 }
 
 export const me = async (req, res) => {
-    console.log('Fetching user...');
     const { userId } = req;
-    const user = await db.user.findUnique({
-        where: { id: userId },
-    });
-    if (!user) {
-        return res.status(404).json({ message: 'User not found' });
-    }
     try {
+        const user = await db.user.findUnique({
+            where: { id: userId },
+            include: {
+                solvedProblems: {
+                    include: { problem: true },
+                },
+            },
+        });
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Calculate stats
+        const totalSolved = user.solvedProblems.length;
+        const totalSubmissions = 324; // Replace with actual logic if tracked
+        const acceptanceRate = ((totalSolved / totalSubmissions) * 100).toFixed(2);
+
+        // Group solved problems by difficulty
+        const difficultyStats = { EASY: 0, MEDIUM: 0, HARD: 0 };
+        user.solvedProblems.forEach((sp) => {
+            difficultyStats[sp.problem.difficultyLevel]++;
+        });
+
+        // Prepare recent activity
+        const recentActivity = user.solvedProblems
+            .slice(-5) // Limit to last 5 activities
+            .map((sp) => ({
+                title: sp.problem.title,
+                difficulty: sp.problem.difficultyLevel,
+                status: 'Solved',
+                solvedAt: sp.solvedAt,
+            }));
+
         res.status(200).json({
             success: true,
             message: 'User authenticated successfully',
@@ -153,14 +173,26 @@ export const me = async (req, res) => {
                 email: user.email,
                 name: user.name,
                 image: user.image,
-                role: user.role
+                role: user.role,
+                coins: user.coins,
+                badges: user.badges,
+                createdAt: user.createdAt,
+                streak: user.streak,
             },
+            stats: {
+                totalSolved,
+                totalSubmissions,
+                acceptanceRate,
+                difficultyStats,
+            },
+            recentActivity,
         });
     } catch (error) {
         console.error('Error fetching user:', error);
         res.status(500).json({ message: error.message });
     }
-}
+};
+
 
 export const refresh = async (req, res) => {
     const { userId } = req;

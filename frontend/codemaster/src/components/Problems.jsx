@@ -1,58 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { BsStars } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-
-const problemsData = [
-  {
-    id: 1,
-    title: 'Two Sum',
-    difficulty: 'Easy',
-    acceptance: 49.2,
-    isPremium: false,
-    isSolved: true,
-  },
-  {
-    id: 2,
-    title: 'Add Two Numbers',
-    difficulty: 'Medium',
-    acceptance: 37.8,
-    isPremium: false,
-    isSolved: false,
-  },
-  {
-    id: 3,
-    title: 'Longest Substring Without Repeating Characters',
-    difficulty: 'Medium',
-    acceptance: 33.8,
-    isPremium: true,
-    isSolved: false,
-  },
-  {
-    id: 4,
-    title: 'Median of Two Sorted Arrays',
-    difficulty: 'Hard',
-    acceptance: 35.2,
-    isPremium: false,
-    isSolved: false,
-  },
-];
+import axios from 'axios';
 
 const difficultyColors = {
-  Easy: 'bg-green-600',
-  Medium: 'bg-yellow-500',
-  Hard: 'bg-red-600',
+  Easy: 'bg-green-600 text-white',
+  Medium: 'bg-yellow-500 text-white',
+  Hard: 'bg-red-600 text-white',
+};
+
+const difficultyTextColors = {
+  Easy: 'text-green-100',
+  Medium: 'text-yellow-100',
+  Hard: 'text-red-100',
+};
+
+const tagColors = {
+  Array: 'bg-blue-500',
+  String: 'bg-purple-500',
+  'Dynamic Programming': 'bg-pink-500',
+  Graph: 'bg-indigo-500',
+  Tree: 'bg-green-500',
+  'Binary Search': 'bg-orange-500',
+  default: 'bg-gray-500'
 };
 
 export default function Problems() {
   const [search, setSearch] = useState('');
   const [difficulty, setDifficulty] = useState('All');
+  const [problems, setProblems] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const filteredProblems = problemsData.filter((problem) => {
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    const fetchProblems = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/v1/problems/get-problems`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        if (response.data.success) {
+          const transformedProblems = response.data.problems.map(problem => {
+            const totalAttempts = (problem.solvedByCount || 0) + (problem.inProgressCount || 0);
+            const acceptanceRate = totalAttempts > 0 
+              ? ((problem.solvedByCount || 0) / totalAttempts) * 100 
+              : 0;
+
+            return {
+              id: problem.id,
+              title: problem.title,
+              difficulty: problem.difficultyLevel || 'Easy',
+              acceptance: acceptanceRate,
+              isPremium: problem.isPremium || false,
+              isSolved: problem.isSolved || false,
+              solvedByCount: problem.solvedByCount || 0,
+              inProgressCount: problem.inProgressCount || 0,
+              tags: problem.tags || []
+            };
+          });
+          setProblems(transformedProblems);
+        } else {
+          setError('Failed to fetch problems');
+        }
+      } catch (err) {
+        setError('Error fetching problems: ' + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProblems();
+  }, []);
+
+  const filteredProblems = problems.filter((problem) => {
     const matchesSearch = problem.title.toLowerCase().includes(search.toLowerCase());
     const matchesDifficulty = difficulty === 'All' || problem.difficulty === difficulty;
     return matchesSearch && matchesDifficulty;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e3a8a] text-white px-4 md:px-20 pt-16">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-xl">Loading problems...</div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e3a8a] text-white px-4 md:px-20 pt-16">
+        <div className="flex items-center justify-center h-64">
+          <div className="text-xl text-red-500">{error}</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#0f172a] to-[#1e3a8a] text-white px-4 md:px-20 pt-16">
@@ -66,12 +114,12 @@ export default function Problems() {
           placeholder="Search problems..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full md:flex-1 px-4 py-2 rounded-lg bg-[#1e293b] text-white placeholder-gray-400 focus:outline-none"
+          className="w-full md:flex-1 px-4 py-2 rounded-lg bg-[#1e293b] placeholder-gray-400 focus:outline-none"
         />
         <select
           value={difficulty}
           onChange={(e) => setDifficulty(e.target.value)}
-          className="px-4 py-2 rounded-lg bg-[#1e293b] text-white"
+          className="px-4 py-2 rounded-lg bg-[#1e293b] placeholder-gray-400 focus:outline-none"
         >
           <option value="All">All Difficulties</option>
           <option value="Easy">Easy</option>
@@ -82,14 +130,19 @@ export default function Problems() {
 
       {/* Problems List */}
       <div className="bg-[#1e293b] rounded-xl p-4 divide-y divide-[#334155]">
-        {filteredProblems.map((problem, index) => (
-          <div key={problem.id} className="flex items-center justify-between py-4">
-            {/* Index + Title + Tags */}
-            <div className="flex items-center gap-4">
-              <div className="text-gray-400 font-bold">{index + 1}</div>
-
-              <div>
-                <div className="flex items-center gap-2 font-semibold">
+        {filteredProblems.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="text-2xl text-gray-400 mb-2">No Problems Found</div>
+            <p className="text-gray-500 text-sm">
+              {search ? `No problems match your search "${search}"` : 'Try adjusting your search or filter criteria'}
+            </p>
+          </div>
+        ) : (
+          filteredProblems.map((problem) => (
+            <div key={problem.id} className="flex items-center justify-between py-4">
+              {/* Title + Tags */}
+              <div className="flex-1">
+                <div className="flex items-center gap-2 font-semibold mb-2">
                   <span className="text-white">{problem.title}</span>
                   {problem.isPremium && (
                     <span className="text-yellow-400 text-xs font-semibold bg-yellow-500 bg-opacity-20 px-2 py-0.5 rounded-md flex items-center gap-1">
@@ -98,28 +151,38 @@ export default function Problems() {
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-white-700 flex items-center gap-2 mt-1">
+                <div className="flex flex-wrap gap-2 items-center">
                   <span
-                    className={`text-xs px-2 py-0.5 rounded-full font-medium ${difficultyColors[problem.difficulty]}`}
+                    className={`text-xs px-3 py-1 rounded-full font-medium ${difficultyColors[problem.difficulty] || difficultyColors.Easy}`}
                   >
                     {problem.difficulty}
                   </span>
-                  <span className="text-sm">Acceptance: {problem.acceptance}%</span>
+                  <span className="text-sm text-gray-400">Acceptance: {problem.acceptance.toFixed(1)}%</span>
+                  <div className="flex flex-wrap gap-2">
+                    {Array.isArray(problem.tags) && problem.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className={`text-xs px-2 py-0.5 rounded-full font-medium ${tagColors[tag] || tagColors.default} bg-opacity-20`}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Status + Button */}
-            <div className="flex items-center gap-4">
-  {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
-  <Link to={`/problem/${problem.id}`}>
-    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
-      Solve
-    </button>
-  </Link>
-</div>
-          </div>
-        ))}
+              {/* Status + Button */}
+              <div className="flex items-center gap-4 ml-4">
+                {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
+                <Link to={`/problem/${problem.id}`}>
+                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
+                    Solve
+                  </button>
+                </Link>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );
