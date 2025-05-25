@@ -43,8 +43,8 @@ model Problem {
   tags            String[]
   userId          String
   examples        Json
-  constraints     String
-  hints           String[] // Change from String? to String[]
+  constraints     String[]
+  hints           String[]
   editorial       String?
   discussion      Json?
 

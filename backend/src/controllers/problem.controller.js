@@ -23,6 +23,9 @@ export const createProblem = async (req, res) => {
   if (!testcases || testcases.length === 0) {
     return res.status(400).json({ error: "Testcases are missing or invalid" });
   }
+  if (!Array.isArray(constraints) || !constraints.every((c) => typeof c === "string")) {
+    return res.status(400).json({ error: "Constraints must be an array of strings" });
+  } 
 
   try {
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
@@ -103,18 +106,28 @@ export const createProblem = async (req, res) => {
 
 export const getAllProblems = async (req, res) => {
   try {
-    const problems = await db.problem.findMany();
+    const problems = await db.problem.findMany({
+      include: {
+        solvedBy: true, // Include solvedBy relation
+      },
+    });
 
-    if (!problems) {
+    const problemsWithStats = problems.map((problem) => ({
+      ...problem,
+      solvedByCount: problem.solvedBy.length, // Count of users who solved the problem
+      inProgressCount: problem.solvedBy.filter((solved) => !solved.solvedAt).length, // Count of users in progress
+    }));
+
+    if (!problemsWithStats) {
       return res.status(404).json({
         error: "No problems Found",
       });
     }
 
     res.status(200).json({
-      sucess: true,
-      message: "Message Fetched Successfully",
-      problems,
+      success: true,
+      message: "Problems Fetched Successfully",
+      problems: problemsWithStats,
     });
   } catch (error) {
     console.log(error);
