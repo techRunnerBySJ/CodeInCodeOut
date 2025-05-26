@@ -34,26 +34,33 @@ export default function ProblemSolvingPage() {
     setError(null);
     try {
       const response = await axios.post(
-        `${API_BASE_URL}/api/v1/problems/run-code`,
+        `${API_BASE_URL}/api/v1/submissions/run`,
         {
           problemId: problemData.id,
-          code,
-          language
+          source_code: code,
+          language: language.toUpperCase()
         },
         {
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
 
       if (response.data.success) {
-        setTestResults(response.data.results);
+        setTestResults(response.data.results.map(result => ({
+          passed: result.passed,
+          input: result.input,
+          expected: result.expected_output,
+          output: result.actual_output,
+          error: result.error
+        })));
       } else {
         setError(response.data.error || 'Failed to run code');
       }
     } catch (err) {
-      setError(err.message || 'Error running code');
+      setError(err.response?.data?.error || err.message || 'Error running code');
     } finally {
       setIsRunning(false);
     }
@@ -63,32 +70,43 @@ export default function ProblemSolvingPage() {
     setIsSubmitting(true);
     setError(null);
     try {
+      const requestData = {
+        problemId: problemData.id,
+        source_code: code,
+        language: language.toUpperCase()
+      };
+      console.log('Submitting solution with data:', requestData);
+      
       const response = await axios.post(
-        `${API_BASE_URL}/api/v1/problems/submit`,
-        {
-          problemId: problemData.id,
-          code,
-          language
-        },
+        `${API_BASE_URL}/api/v1/submissions/submit`,
+        requestData,
         {
           headers: {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
 
       if (response.data.success) {
-        setTestResults(response.data.results);
-        if (response.data.solved) {
-          // Show success message and update UI
-          alert('Congratulations! Problem solved successfully!');
-          navigate('/problems');
-        }
+        // Show success message with coins earned
+        alert(`Congratulations! Problem solved successfully! You earned ${response.data.coinsEarned} coins!`);
+        navigate('/problems');
       } else {
         setError(response.data.error || 'Failed to submit solution');
+        // If there are test results in the error response, show them
+        if (response.data.results) {
+          setTestResults(response.data.results.map(result => ({
+            passed: result.passed,
+            input: result.input,
+            expected: result.expected_output,
+            output: result.actual_output,
+            error: result.error
+          })));
+        }
       }
     } catch (err) {
-      setError(err.message || 'Error submitting solution');
+      setError(err.response?.data?.error || err.message || 'Error submitting solution');
     } finally {
       setIsSubmitting(false);
     }
@@ -235,7 +253,7 @@ export default function ProblemSolvingPage() {
               >
                 <option value="javascript">JavaScript</option>
                 <option value="python">Python</option>
-                <option value="java">Java</option>
+                <option value="C">C</option>
                 <option value="cpp">C++</option>
               </select>
             </div>

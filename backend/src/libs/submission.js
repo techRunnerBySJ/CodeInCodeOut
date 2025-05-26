@@ -8,7 +8,7 @@ export const submissions = {};
 export const getCustomLanguageId = (language) => {
   const languageMap = {
     PYTHON: "python",
-    JAVA: "java",
+    C: "C",
     JAVASCRIPT: "javascript",
   };
 
