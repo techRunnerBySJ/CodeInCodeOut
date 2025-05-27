@@ -32,7 +32,12 @@ export default function Navbar() {
         },
       });
       localStorage.removeItem('token');
-      navigate('/login');
+      localStorage.removeItem('role');
+      localStorage.removeItem('username');
+      localStorage.removeItem('userId');
+      setUser(null);
+      setDropdownOpen(false);
+      navigate('/');
     } catch (error) {
       console.error('Error during logout:', error);
     }
