@@ -253,8 +253,8 @@ export default function ProblemSolvingPage() {
               >
                 <option value="javascript">JavaScript</option>
                 <option value="python">Python</option>
-                <option value="C">C</option>
-                <option value="cpp">C++</option>
+                {/* <option value="C">C</option>
+                <option value="cpp">C++</option> */}
               </select>
             </div>
             <div className="h-[400px]">

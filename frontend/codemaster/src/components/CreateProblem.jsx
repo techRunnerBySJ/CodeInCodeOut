@@ -9,7 +9,7 @@ export default function CreateProblem() {
     const map = {
       javascript: 'JavaScript',
       python: 'Python',
-      C: 'C',
+      // C: 'C',
     };
     return map[lang.toLowerCase()] || lang;
   };
@@ -381,9 +381,9 @@ export default function CreateProblem() {
                   >
                     <option value="JavaScript">JavaScript</option>
                     <option value="Python">Python</option>
-                    <option value="C">C</option>
+                    {/* <option value="C">C</option>
                     <option value="C++">C++</option>
-                    <option value="C#">C#</option>
+                    <option value="C#">C#</option> */}
                   </select>
                   <button
                     type="button"
@@ -481,7 +481,7 @@ export default function CreateProblem() {
 >
   <option value="JavaScript">JavaScript</option>
   <option value="Python">Python</option>
-  <option value="C">C</option>
+  {/* <option value="C">C</option> */}
 </select>
                   <button
                     type="button"

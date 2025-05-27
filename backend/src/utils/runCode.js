@@ -26,11 +26,12 @@ const extractFunctionName = (code, language) => {
   } else if (language === "python") {
     const match = code.match(/def\s+(\w+)\s*\(/);
     return match ? match[1] : null;
-  } else if (language === "c") {
-    const match = code.match(/\b[\w\s\*]+?\s+(\w+)\s*\([^)]*\)\s*\{/);
-    console.log("Extracted C function name:", match ? match[1] : null);
-    return match ? match[1] : null;
   }
+//   } else if (language === "c") {
+//     const match = code.match(/\b[\w\s\*]+?\s+(\w+)\s*\([^)]*\)\s*\{/);
+//     console.log("Extracted C function name:", match ? match[1] : null);
+//     return match ? match[1] : null;
+//   }
   return null;
 };
 
@@ -47,7 +48,7 @@ export const runCode = async (code, language, problemId) => {
   const fileMap = {
     javascript: "main.cjs",
     python: "main.py",
-    c: "main.c",
+    // c: "main.c",
   };
   const filename = fileMap[language];
   const filepath = path.join("/tmp", filename);
