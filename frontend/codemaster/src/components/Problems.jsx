@@ -1,19 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { FiCheckCircle } from 'react-icons/fi';
 import { BsStars } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const difficultyColors = {
-  Easy: 'bg-green-600 text-white',
-  Medium: 'bg-yellow-500 text-white',
-  Hard: 'bg-red-600 text-white',
-};
-
-const difficultyTextColors = {
-  Easy: 'text-green-100',
-  Medium: 'text-yellow-100',
-  Hard: 'text-red-100',
+  EASY: 'bg-emerald-500 text-white',
+  MEDIUM: 'bg-amber-500 text-white',
+  HARD: 'bg-rose-600 text-white',
 };
 
 const tagColors = {
@@ -29,12 +23,41 @@ const tagColors = {
 export default function Problems() {
   const [search, setSearch] = useState('');
   const [difficulty, setDifficulty] = useState('All');
+  const [category, setCategory] = useState('All');
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
   const currentUserId = localStorage.getItem('userId');
+  const location = useLocation();
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+  useEffect(() => {
+    // Set selected category from navigation state if available
+    if (location.state?.selectedCategory) {
+      setCategory(location.state.selectedCategory);
+    }
+  }, [location]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get(`${API_BASE_URL}/api/v1/problems/get-problems-by-categories`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        if (response.data.categories) {
+          setCategories(response.data.categories.map(cat => cat.tag));
+        }
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   useEffect(() => {
     const fetchProblems = async () => {
@@ -89,8 +112,9 @@ export default function Problems() {
 
   const filteredProblems = problems.filter((problem) => {
     const matchesSearch = problem.title.toLowerCase().includes(search.toLowerCase());
-    const matchesDifficulty = difficulty === 'All' || problem.difficulty === difficulty;
-    return matchesSearch && matchesDifficulty;
+    const matchesDifficulty = difficulty === 'All' || problem.difficulty.toUpperCase() === difficulty.toUpperCase();
+    const matchesCategory = category === 'All' || problem.tags?.includes(category);
+    return matchesSearch && matchesDifficulty && matchesCategory;
   });
 
   if (loading) {
@@ -137,6 +161,16 @@ export default function Problems() {
           <option value="Medium">Medium</option>
           <option value="Hard">Hard</option>
         </select>
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="px-4 py-2 rounded-lg bg-[#1e293b] placeholder-gray-400 focus:outline-none"
+        >
+          <option value="All">All Categories</option>
+          {categories.map((cat, index) => (
+            <option key={index} value={cat}>{cat}</option>
+          ))}
+        </select>
       </div>
 
       {/* Problems List */}
@@ -164,7 +198,7 @@ export default function Problems() {
                 </div>
                 <div className="flex flex-wrap gap-2 items-center">
                   <span
-                    className={`text-xs px-3 py-1 rounded-full font-medium ${difficultyColors[problem.difficulty] || difficultyColors.Easy}`}
+                    className={`text-xs px-3 py-1 rounded-full font-medium ${difficultyColors[problem.difficulty] || difficultyColors.EASY}`}
                   >
                     {problem.difficulty}
                   </span>

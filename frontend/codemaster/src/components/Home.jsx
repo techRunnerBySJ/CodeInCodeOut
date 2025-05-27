@@ -3,11 +3,14 @@ import RegisterDialog from './RegisterDialog.jsx';
 import { FiCode, FiUser, FiStar } from 'react-icons/fi';
 import axios from 'axios';
 import { FaAd, FaCode } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 export default function Home({ onOpenDialog }) {
   const [showDialog, setShowDialog] = useState(false);
   const [categories, setCategories] = useState([]); // State to store categories
   const BASE_API_URL = process.env.REACT_APP_API_URL; // Base API URL
+  const navigate = useNavigate();
+
   const handleStartCoding = async () => {
     const isLoggedIn = await fakeLoginCheck();
     if (!isLoggedIn) {
@@ -103,12 +106,13 @@ export default function Home({ onOpenDialog }) {
         <div className="grid md:grid-cols-4 gap-6">
           {categories.length > 0 ? (
             categories.map((cat, i) => (
-              <div key={i} className="bg-[#1e293b] p-6 rounded-xl text-left">
+              <div 
+                key={i} 
+                className="bg-[#1e293b] p-6 rounded-xl text-left cursor-pointer hover:bg-[#2d3b4f] transition-colors"
+                onClick={() => navigate('/problems', { state: { selectedCategory: cat.tag } })}
+              >
                 <h3 className="text-xl font-bold mb-2 text-white-400"><FaCode className="mr-2 text-blue-400"/>{cat.tag}</h3>
                 <p className="text-gray-300 mb-3 text-sm text-gray-400">{cat.count} problems</p>
-                {/* <span className="text-white text-xs font-semibold px-3 py-1 rounded-full bg-blue-600">
-                  Category
-                </span> */}
               </div>
             ))
           ) : (
