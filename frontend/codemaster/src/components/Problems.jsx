@@ -32,6 +32,7 @@ export default function Problems() {
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const currentUserId = localStorage.getItem('userId');
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
 
@@ -49,17 +50,27 @@ export default function Problems() {
             const acceptanceRate = totalAttempts > 0 
               ? ((problem.solvedByCount || 0) / totalAttempts) * 100 
               : 0;
-
+            console.log(currentUserId);
+            const isSolved = problem.solvedBy?.some(solution => solution.userId === currentUserId) || false;
+            console.log(isSolved);
             return {
               id: problem.id,
               title: problem.title,
               difficulty: problem.difficultyLevel || 'Easy',
               acceptance: acceptanceRate,
               isPremium: problem.isPremium || false,
-              isSolved: problem.isSolved || false,
+              isSolved: isSolved,
               solvedByCount: problem.solvedByCount || 0,
               inProgressCount: problem.inProgressCount || 0,
-              tags: problem.tags || []
+              tags: problem.tags || [],
+              description: problem.description,
+              examples: problem.examples,
+              constraints: problem.constraints,
+              testcases: problem.testcases,
+              codeSnippets: problem.codeSnippets,
+              referenceSolutions: problem.referenceSolutions,
+              hints: problem.hints,
+              discussion: problem.discussion
             };
           });
           setProblems(transformedProblems);
@@ -74,7 +85,7 @@ export default function Problems() {
     };
 
     fetchProblems();
-  }, []);
+  }, [currentUserId]);
 
   const filteredProblems = problems.filter((problem) => {
     const matchesSearch = problem.title.toLowerCase().includes(search.toLowerCase());
@@ -173,29 +184,58 @@ export default function Problems() {
 
               {/* Status + Button */}
               <div className="flex items-center gap-4 ml-4">
-                {problem.isSolved && <FiCheckCircle className="text-green-400 text-xl" />}
-                <Link 
-                  to={`/problem/${problem.id}`}
-                  state={{ 
-                    problemData: {
-                      id: problem.id,
-                      title: problem.title,
-                      difficulty: problem.difficulty,
-                      description: problem.description,
-                      examples: problem.examples,
-                      constraints: problem.constraints,
-                      testcases: problem.testcases,
-                      codeSnippets: problem.codeSnippets,
-                      referenceSolutions: problem.referenceSolutions,
-                      hints: problem.hints,
-                      discussion: problem.discussion
-                    }
-                  }}
-                >
-                  <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
-                    Solve
-                  </button>
-                </Link>
+                {problem.isSolved ? (
+                  <>
+                    <FiCheckCircle className="text-green-400 text-xl" />
+                    <Link 
+                      to={`/problem/${problem.id}`}
+                      state={{ 
+                        problemData: {
+                          id: problem.id,
+                          title: problem.title,
+                          difficulty: problem.difficulty,
+                          description: problem.description,
+                          examples: problem.examples,
+                          constraints: problem.constraints,
+                          testcases: problem.testcases,
+                          codeSnippets: problem.codeSnippets,
+                          referenceSolutions: problem.referenceSolutions,
+                          hints: problem.hints,
+                          discussion: problem.discussion,
+                          isSolved: true
+                        }
+                      }}
+                    >
+                      <button className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-1.5 rounded-lg font-medium">
+                        View
+                      </button>
+                    </Link>
+                  </>
+                ) : (
+                  <Link 
+                    to={`/problem/${problem.id}`}
+                    state={{ 
+                      problemData: {
+                        id: problem.id,
+                        title: problem.title,
+                        difficulty: problem.difficulty,
+                        description: problem.description,
+                        examples: problem.examples,
+                        constraints: problem.constraints,
+                        testcases: problem.testcases,
+                        codeSnippets: problem.codeSnippets,
+                        referenceSolutions: problem.referenceSolutions,
+                        hints: problem.hints,
+                        discussion: problem.discussion,
+                        isSolved: false
+                      }
+                    }}
+                  >
+                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1.5 rounded-lg font-medium">
+                      Solve
+                    </button>
+                  </Link>
+                )}
               </div>
             </div>
           ))

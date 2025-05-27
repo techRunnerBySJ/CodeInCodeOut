@@ -21,6 +21,8 @@ const API_BASE_URL = process.env.REACT_APP_API_URL;
       // Save token and user details
       localStorage.setItem('token', token);
       localStorage.setItem('role', user.role);
+      localStorage.setItem('username', user.username);
+      localStorage.setItem('userId', user.id);
       console.log('User signed in:', user);
   
       // Close the dialog box

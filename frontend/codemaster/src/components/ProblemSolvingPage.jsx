@@ -17,6 +17,7 @@ export default function ProblemSolvingPage() {
   const [isRunning, setIsRunning] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [isSolved, setIsSolved] = useState(false);
 
   useEffect(() => {
     if (!problemData) {
@@ -27,6 +28,9 @@ export default function ProblemSolvingPage() {
     if (problemData.codeSnippets && problemData.codeSnippets[language]) {
       setCode(problemData.codeSnippets[language]);
     }
+    // Set solved status
+    setIsSolved(problemData.isSolved || false);
+    console.log(problemData.isSolved);
   }, [problemData, language, navigate]);
 
   const handleRunCode = async () => {
@@ -89,8 +93,8 @@ export default function ProblemSolvingPage() {
       );
 
       if (response.data.success) {
-        // Show success message with coins earned
-        alert(`Congratulations! Problem solved successfully! You earned ${response.data.coinsEarned} coins!`);
+        // Show success message with coins earned and streak
+        alert(`Congratulations! Problem solved successfully!\nYou earned ${response.data.coinsEarned} coins!\nYour current streak: ${response.data.streak}`);
         navigate('/problems');
       } else {
         setError(response.data.error || 'Failed to submit solution');
@@ -267,21 +271,26 @@ export default function ProblemSolvingPage() {
                 options={{
                   minimap: { enabled: false },
                   fontSize: 14,
+                  readOnly: isSolved
                 }}
               />
             </div>
             <div className="mt-4 flex gap-4">
               <button 
-                className="bg-gray-600 px-4 py-2 rounded flex items-center gap-2 text-sm text-white hover:bg-gray-500 disabled:opacity-50"
+                className={`px-4 py-2 rounded flex items-center gap-2 text-sm text-white disabled:opacity-50 ${
+                  isSolved ? 'bg-gray-600 cursor-not-allowed' : 'bg-gray-600 hover:bg-gray-500'
+                }`}
                 onClick={handleRunCode}
-                disabled={isRunning || isSubmitting}
+                disabled={isRunning || isSubmitting || isSolved}
               >
                 <FaPlay /> {isRunning ? 'Running...' : 'Run Code'}
               </button>
               <button 
-                className="bg-green-600 px-4 py-2 rounded flex items-center gap-2 text-sm text-white hover:bg-green-500 disabled:opacity-50"
+                className={`px-4 py-2 rounded flex items-center gap-2 text-sm text-white disabled:opacity-50 ${
+                  isSolved ? 'bg-gray-600 cursor-not-allowed' : 'bg-green-600 hover:bg-green-500'
+                }`}
                 onClick={handleSubmit}
-                disabled={isRunning || isSubmitting}
+                disabled={isRunning || isSubmitting || isSolved}
               >
                 <FaPaperPlane /> {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>

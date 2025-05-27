@@ -65,8 +65,6 @@ export const runProblem = async (req, res) => {
   }
 };
 
-
-
 export const submitProblem = async (req, res) => {
   const {
     problemId,
@@ -101,34 +99,17 @@ export const submitProblem = async (req, res) => {
       return res.status(400).json({ error: `Language ${language} is not supported.` });
     }
 
-    // Execute the user's code for each test case
-    const results = await Promise.all(
-      testcases.map(async ({ input, output }) => {
-        const result = await runCode(source_code, languageId, input);
-
-        const normalize = (str) => (str ? str.replace(/\r?\n|\r/g, "").trim() : "");
-
-        const actualOutput = normalize(result.stdout);
-        const expectedOutput = normalize(output);
-
-        return {
-          input,
-          expected_output: expectedOutput,
-          actual_output: actualOutput,
-          passed: actualOutput === expectedOutput,
-          error: result.stderr || null,
-        };
-      })
-    );
+    // Run all test cases at once using runCode
+    const runResult = await runCode(source_code, languageId, problemId);
 
     // Check if all test cases passed
-    const allPassed = results.every((test) => test.passed);
+    const allPassed = runResult.results.every((test) => test.passed);
 
     if (!allPassed) {
       return res.status(400).json({
         success: false,
         message: "Some test cases failed.",
-        results,
+        results: runResult.results,
       });
     }
 
@@ -144,33 +125,45 @@ export const submitProblem = async (req, res) => {
       return res.status(400).json({ error: "Problem already solved by the user." });
     }
 
-    // Award coins for solving the problem
-    const coinsEarned = 10; // Example: 10 coins per problem
-    await db.user.update({
-      where: { id: req.user.id },
-      data: {
-        coins: { increment: coinsEarned },
-      },
-    });
+    // Start a transaction to update all related tables
+    const transaction = await db.$transaction(async (tx) => {
+      // Award coins for solving the problem
+      const coinsEarned = 10; // Example: 10 coins per problem
+      const updatedUser = await tx.user.update({
+        where: { id: req.user.id },
+        data: {
+          coins: { increment: coinsEarned },
+          streak: { increment: 1 }, // Increment streak for solving a problem
+        },
+      });
 
-    // Record the solved problem
-    await db.solvedProblem.create({
-      data: {
-        userId: req.user.id,
-        problemId,
-      },
+      // Record the solved problem
+      const solvedProblem = await tx.solvedProblem.create({
+        data: {
+          userId: req.user.id,
+          problemId,
+        },
+      });
+
+      return {
+        coinsEarned,
+        updatedUser,
+        solvedProblem,
+      };
     });
 
     return res.status(200).json({
       success: true,
-      message: "Problem solved successfully. Coins awarded!",
-      coinsEarned,
+      message: "Problem solved successfully!",
+      coinsEarned: transaction.coinsEarned,
+      streak: transaction.updatedUser.streak,
     });
   } catch (error) {
     console.error("Error while submitting problem:", error);
     return res.status(500).json({ error: "Error while submitting the problem." });
   }
 };
+
 // Handle batch submission requests
 export const submitBatch = async (submissionsArray) => {
     const tokens = submissionsArray.map(({ source_code, language_id, stdin, expected_output }) => {
@@ -201,7 +194,6 @@ export const submitBatch = async (submissionsArray) => {
 
     return tokens;
 };
-
 
 // Handle retrieving batch results
 export const getBatchResults = async (req, res) => {
