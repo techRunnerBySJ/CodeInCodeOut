@@ -12,15 +12,22 @@ export default function Navbar() {
   const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
 
   const fetchUserData = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      setUser(null);
+      return;
+    }
+    
     try {
       const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/auth/me`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
       setUser(response.data.user);
     } catch (error) {
       console.error('Error fetching user data:', error);
+      setUser(null);
     }
   };
 
