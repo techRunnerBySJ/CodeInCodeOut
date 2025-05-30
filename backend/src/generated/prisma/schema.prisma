@@ -1,6 +1,12 @@
 generator client {
+<<<<<<< HEAD
   provider = "prisma-client-js"
   output   = "../src/generated/prisma"
+=======
+  provider      = "prisma-client-js"
+  output        = "../src/generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+>>>>>>> dev
 }
 
 datasource db {
@@ -13,6 +19,15 @@ enum UserRole {
   USER
 }
 
+<<<<<<< HEAD
+=======
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+>>>>>>> dev
 model User {
   id        String   @id @default(uuid())
   name      String?
@@ -20,6 +35,52 @@ model User {
   image     String?
   role      UserRole @default(USER)
   password  String
+<<<<<<< HEAD
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+=======
+  coins     Int      @default(0)
+  streak    Int      @default(0)
+  badges    Json     @default("[]")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  problems       Problem[]
+  solvedProblems SolvedProblem[]
+}
+
+model Problem {
+  id              String     @id @default(uuid())
+  title           String
+  description     String
+  difficultyLevel Difficulty
+  tags            String[]
+  userId          String
+  examples        Json
+  constraints     String[]
+  hints           String[]
+  editorial       String?
+  discussion      Json?
+
+  testcases          Json
+  codeSnippets       Json
+  referenceSolutions Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  solvedBy SolvedProblem[]
+}
+
+model SolvedProblem {
+  id        String   @id @default(uuid())
+  userId    String
+  problemId String
+  solvedAt  DateTime @default(now())
+
+  // Relationships
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  problem Problem @relation(fields: [problemId], references: [id], onDelete: Cascade)
+>>>>>>> dev
 }

@@ -127,20 +127,76 @@ exports.Prisma.UserScalarFieldEnum = {
   image: 'image',
   role: 'role',
   password: 'password',
+<<<<<<< HEAD
+=======
+  coins: 'coins',
+  streak: 'streak',
+  badges: 'badges',
+>>>>>>> dev
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
+<<<<<<< HEAD
+=======
+exports.Prisma.ProblemScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  difficultyLevel: 'difficultyLevel',
+  tags: 'tags',
+  userId: 'userId',
+  examples: 'examples',
+  constraints: 'constraints',
+  hints: 'hints',
+  editorial: 'editorial',
+  discussion: 'discussion',
+  testcases: 'testcases',
+  codeSnippets: 'codeSnippets',
+  referenceSolutions: 'referenceSolutions',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SolvedProblemScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  problemId: 'problemId',
+  solvedAt: 'solvedAt'
+};
+
+>>>>>>> dev
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
 };
 
+<<<<<<< HEAD
+=======
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
+};
+
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
+>>>>>>> dev
 exports.Prisma.QueryMode = {
   default: 'default',
   insensitive: 'insensitive'
 };
 
+<<<<<<< HEAD
+=======
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+>>>>>>> dev
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -150,8 +206,21 @@ exports.UserRole = exports.$Enums.UserRole = {
   USER: 'USER'
 };
 
+<<<<<<< HEAD
 exports.Prisma.ModelName = {
   User: 'User'
+=======
+exports.Difficulty = exports.$Enums.Difficulty = {
+  EASY: 'EASY',
+  MEDIUM: 'MEDIUM',
+  HARD: 'HARD'
+};
+
+exports.Prisma.ModelName = {
+  User: 'User',
+  Problem: 'Problem',
+  SolvedProblem: 'SolvedProblem'
+>>>>>>> dev
 };
 
 /**

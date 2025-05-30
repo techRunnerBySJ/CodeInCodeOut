@@ -18,6 +18,19 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+<<<<<<< HEAD
+=======
+/**
+ * Model Problem
+ * 
+ */
+export type Problem = $Result.DefaultSelection<Prisma.$ProblemPayload>
+/**
+ * Model SolvedProblem
+ * 
+ */
+export type SolvedProblem = $Result.DefaultSelection<Prisma.$SolvedProblemPayload>
+>>>>>>> dev
 
 /**
  * Enums
@@ -30,12 +43,31 @@ export namespace $Enums {
 
 export type UserRole = (typeof UserRole)[keyof typeof UserRole]
 
+<<<<<<< HEAD
+=======
+
+export const Difficulty: {
+  EASY: 'EASY',
+  MEDIUM: 'MEDIUM',
+  HARD: 'HARD'
+};
+
+export type Difficulty = (typeof Difficulty)[keyof typeof Difficulty]
+
+>>>>>>> dev
 }
 
 export type UserRole = $Enums.UserRole
 
 export const UserRole: typeof $Enums.UserRole
 
+<<<<<<< HEAD
+=======
+export type Difficulty = $Enums.Difficulty
+
+export const Difficulty: typeof $Enums.Difficulty
+
+>>>>>>> dev
 /**
  * ##  Prisma Client ʲˢ
  *
@@ -170,6 +202,29 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+<<<<<<< HEAD
+=======
+
+  /**
+   * `prisma.problem`: Exposes CRUD operations for the **Problem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Problems
+    * const problems = await prisma.problem.findMany()
+    * ```
+    */
+  get problem(): Prisma.ProblemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.solvedProblem`: Exposes CRUD operations for the **SolvedProblem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SolvedProblems
+    * const solvedProblems = await prisma.solvedProblem.findMany()
+    * ```
+    */
+  get solvedProblem(): Prisma.SolvedProblemDelegate<ExtArgs, ClientOptions>;
+>>>>>>> dev
 }
 
 export namespace Prisma {
@@ -610,7 +665,13 @@ export namespace Prisma {
 
 
   export const ModelName: {
+<<<<<<< HEAD
     User: 'User'
+=======
+    User: 'User',
+    Problem: 'Problem',
+    SolvedProblem: 'SolvedProblem'
+>>>>>>> dev
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -629,7 +690,11 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
+<<<<<<< HEAD
       modelProps: "user"
+=======
+      modelProps: "user" | "problem" | "solvedProblem"
+>>>>>>> dev
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -707,6 +772,157 @@ export namespace Prisma {
           }
         }
       }
+<<<<<<< HEAD
+=======
+      Problem: {
+        payload: Prisma.$ProblemPayload<ExtArgs>
+        fields: Prisma.ProblemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProblemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProblemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          findFirst: {
+            args: Prisma.ProblemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProblemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          findMany: {
+            args: Prisma.ProblemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>[]
+          }
+          create: {
+            args: Prisma.ProblemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          createMany: {
+            args: Prisma.ProblemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ProblemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>[]
+          }
+          delete: {
+            args: Prisma.ProblemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          update: {
+            args: Prisma.ProblemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProblemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProblemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ProblemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>[]
+          }
+          upsert: {
+            args: Prisma.ProblemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProblemPayload>
+          }
+          aggregate: {
+            args: Prisma.ProblemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProblem>
+          }
+          groupBy: {
+            args: Prisma.ProblemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProblemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProblemCountArgs<ExtArgs>
+            result: $Utils.Optional<ProblemCountAggregateOutputType> | number
+          }
+        }
+      }
+      SolvedProblem: {
+        payload: Prisma.$SolvedProblemPayload<ExtArgs>
+        fields: Prisma.SolvedProblemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SolvedProblemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SolvedProblemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          findFirst: {
+            args: Prisma.SolvedProblemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SolvedProblemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          findMany: {
+            args: Prisma.SolvedProblemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>[]
+          }
+          create: {
+            args: Prisma.SolvedProblemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          createMany: {
+            args: Prisma.SolvedProblemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SolvedProblemCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>[]
+          }
+          delete: {
+            args: Prisma.SolvedProblemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          update: {
+            args: Prisma.SolvedProblemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          deleteMany: {
+            args: Prisma.SolvedProblemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SolvedProblemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SolvedProblemUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>[]
+          }
+          upsert: {
+            args: Prisma.SolvedProblemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SolvedProblemPayload>
+          }
+          aggregate: {
+            args: Prisma.SolvedProblemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSolvedProblem>
+          }
+          groupBy: {
+            args: Prisma.SolvedProblemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SolvedProblemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SolvedProblemCountArgs<ExtArgs>
+            result: $Utils.Optional<SolvedProblemCountAggregateOutputType> | number
+          }
+        }
+      }
+>>>>>>> dev
     }
   } & {
     other: {
@@ -792,6 +1008,11 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+<<<<<<< HEAD
+=======
+    problem?: ProblemOmit
+    solvedProblem?: SolvedProblemOmit
+>>>>>>> dev
   }
 
   /* Types for Logging */
@@ -881,6 +1102,79 @@ export namespace Prisma {
    */
 
 
+<<<<<<< HEAD
+=======
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    problems: number
+    solvedProblems: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problems?: boolean | UserCountOutputTypeCountProblemsArgs
+    solvedProblems?: boolean | UserCountOutputTypeCountSolvedProblemsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProblemWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountSolvedProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SolvedProblemWhereInput
+  }
+
+
+  /**
+   * Count Type ProblemCountOutputType
+   */
+
+  export type ProblemCountOutputType = {
+    solvedBy: number
+  }
+
+  export type ProblemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    solvedBy?: boolean | ProblemCountOutputTypeCountSolvedByArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProblemCountOutputType
+     */
+    select?: ProblemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProblemCountOutputType without action
+   */
+  export type ProblemCountOutputTypeCountSolvedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SolvedProblemWhereInput
+  }
+
+>>>>>>> dev
 
   /**
    * Models
@@ -892,10 +1186,28 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+<<<<<<< HEAD
+=======
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+>>>>>>> dev
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
+<<<<<<< HEAD
+=======
+  export type UserAvgAggregateOutputType = {
+    coins: number | null
+    streak: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    coins: number | null
+    streak: number | null
+  }
+
+>>>>>>> dev
   export type UserMinAggregateOutputType = {
     id: string | null
     name: string | null
@@ -903,6 +1215,11 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+<<<<<<< HEAD
+=======
+    coins: number | null
+    streak: number | null
+>>>>>>> dev
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -914,6 +1231,11 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole | null
     password: string | null
+<<<<<<< HEAD
+=======
+    coins: number | null
+    streak: number | null
+>>>>>>> dev
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -925,12 +1247,31 @@ export namespace Prisma {
     image: number
     role: number
     password: number
+<<<<<<< HEAD
+=======
+    coins: number
+    streak: number
+    badges: number
+>>>>>>> dev
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
+<<<<<<< HEAD
+=======
+  export type UserAvgAggregateInputType = {
+    coins?: true
+    streak?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    coins?: true
+    streak?: true
+  }
+
+>>>>>>> dev
   export type UserMinAggregateInputType = {
     id?: true
     name?: true
@@ -938,6 +1279,11 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+<<<<<<< HEAD
+=======
+    coins?: true
+    streak?: true
+>>>>>>> dev
     createdAt?: true
     updatedAt?: true
   }
@@ -949,6 +1295,11 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+<<<<<<< HEAD
+=======
+    coins?: true
+    streak?: true
+>>>>>>> dev
     createdAt?: true
     updatedAt?: true
   }
@@ -960,6 +1311,12 @@ export namespace Prisma {
     image?: true
     role?: true
     password?: true
+<<<<<<< HEAD
+=======
+    coins?: true
+    streak?: true
+    badges?: true
+>>>>>>> dev
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -1003,6 +1360,21 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+<<<<<<< HEAD
+=======
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+>>>>>>> dev
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -1033,6 +1405,11 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+<<<<<<< HEAD
+=======
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
+>>>>>>> dev
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
@@ -1044,9 +1421,20 @@ export namespace Prisma {
     image: string | null
     role: $Enums.UserRole
     password: string
+<<<<<<< HEAD
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
+=======
+    coins: number
+    streak: number
+    badges: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
+>>>>>>> dev
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -1072,8 +1460,19 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+<<<<<<< HEAD
     createdAt?: boolean
     updatedAt?: boolean
+=======
+    coins?: boolean
+    streak?: boolean
+    badges?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    problems?: boolean | User$problemsArgs<ExtArgs>
+    solvedProblems?: boolean | User$solvedProblemsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+>>>>>>> dev
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1083,6 +1482,12 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+<<<<<<< HEAD
+=======
+    coins?: boolean
+    streak?: boolean
+    badges?: boolean
+>>>>>>> dev
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1094,6 +1499,12 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+<<<<<<< HEAD
+=======
+    coins?: boolean
+    streak?: boolean
+    badges?: boolean
+>>>>>>> dev
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -1105,15 +1516,39 @@ export namespace Prisma {
     image?: boolean
     role?: boolean
     password?: boolean
+<<<<<<< HEAD
+=======
+    coins?: boolean
+    streak?: boolean
+    badges?: boolean
+>>>>>>> dev
     createdAt?: boolean
     updatedAt?: boolean
   }
 
+<<<<<<< HEAD
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
     objects: {}
+=======
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "image" | "role" | "password" | "coins" | "streak" | "badges" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    problems?: boolean | User$problemsArgs<ExtArgs>
+    solvedProblems?: boolean | User$solvedProblemsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "User"
+    objects: {
+      problems: Prisma.$ProblemPayload<ExtArgs>[]
+      solvedProblems: Prisma.$SolvedProblemPayload<ExtArgs>[]
+    }
+>>>>>>> dev
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string | null
@@ -1121,6 +1556,12 @@ export namespace Prisma {
       image: string | null
       role: $Enums.UserRole
       password: string
+<<<<<<< HEAD
+=======
+      coins: number
+      streak: number
+      badges: Prisma.JsonValue
+>>>>>>> dev
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -1517,6 +1958,11 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+<<<<<<< HEAD
+=======
+    problems<T extends User$problemsArgs<ExtArgs> = {}>(args?: Subset<T, User$problemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    solvedProblems<T extends User$solvedProblemsArgs<ExtArgs> = {}>(args?: Subset<T, User$solvedProblemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+>>>>>>> dev
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1552,6 +1998,12 @@ export namespace Prisma {
     readonly image: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'UserRole'>
     readonly password: FieldRef<"User", 'String'>
+<<<<<<< HEAD
+=======
+    readonly coins: FieldRef<"User", 'Int'>
+    readonly streak: FieldRef<"User", 'Int'>
+    readonly badges: FieldRef<"User", 'Json'>
+>>>>>>> dev
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -1571,6 +2023,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1589,6 +2048,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1607,6 +2073,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1655,6 +2128,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1703,6 +2183,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1746,6 +2233,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * The data needed to create a User.
      */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>
@@ -1794,6 +2288,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * The data needed to update a User.
      */
     data: XOR<UserUpdateInput, UserUncheckedUpdateInput>
@@ -1860,6 +2361,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1886,6 +2394,13 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+<<<<<<< HEAD
+=======
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
+>>>>>>> dev
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1906,6 +2421,57 @@ export namespace Prisma {
   }
 
   /**
+<<<<<<< HEAD
+=======
+   * User.problems
+   */
+  export type User$problemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    where?: ProblemWhereInput
+    orderBy?: ProblemOrderByWithRelationInput | ProblemOrderByWithRelationInput[]
+    cursor?: ProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProblemScalarFieldEnum | ProblemScalarFieldEnum[]
+  }
+
+  /**
+   * User.solvedProblems
+   */
+  export type User$solvedProblemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    where?: SolvedProblemWhereInput
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    cursor?: SolvedProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SolvedProblemScalarFieldEnum | SolvedProblemScalarFieldEnum[]
+  }
+
+  /**
+>>>>>>> dev
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1917,6 +2483,2265 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+<<<<<<< HEAD
+=======
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Problem
+   */
+
+  export type AggregateProblem = {
+    _count: ProblemCountAggregateOutputType | null
+    _min: ProblemMinAggregateOutputType | null
+    _max: ProblemMaxAggregateOutputType | null
+  }
+
+  export type ProblemMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    difficultyLevel: $Enums.Difficulty | null
+    userId: string | null
+    editorial: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProblemMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    difficultyLevel: $Enums.Difficulty | null
+    userId: string | null
+    editorial: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProblemCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    difficultyLevel: number
+    tags: number
+    userId: number
+    examples: number
+    constraints: number
+    hints: number
+    editorial: number
+    discussion: number
+    testcases: number
+    codeSnippets: number
+    referenceSolutions: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProblemMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    difficultyLevel?: true
+    userId?: true
+    editorial?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProblemMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    difficultyLevel?: true
+    userId?: true
+    editorial?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProblemCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    difficultyLevel?: true
+    tags?: true
+    userId?: true
+    examples?: true
+    constraints?: true
+    hints?: true
+    editorial?: true
+    discussion?: true
+    testcases?: true
+    codeSnippets?: true
+    referenceSolutions?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProblemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Problem to aggregate.
+     */
+    where?: ProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Problems to fetch.
+     */
+    orderBy?: ProblemOrderByWithRelationInput | ProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Problems
+    **/
+    _count?: true | ProblemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProblemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProblemMaxAggregateInputType
+  }
+
+  export type GetProblemAggregateType<T extends ProblemAggregateArgs> = {
+        [P in keyof T & keyof AggregateProblem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProblem[P]>
+      : GetScalarType<T[P], AggregateProblem[P]>
+  }
+
+
+
+
+  export type ProblemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProblemWhereInput
+    orderBy?: ProblemOrderByWithAggregationInput | ProblemOrderByWithAggregationInput[]
+    by: ProblemScalarFieldEnum[] | ProblemScalarFieldEnum
+    having?: ProblemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProblemCountAggregateInputType | true
+    _min?: ProblemMinAggregateInputType
+    _max?: ProblemMaxAggregateInputType
+  }
+
+  export type ProblemGroupByOutputType = {
+    id: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags: string[]
+    userId: string
+    examples: JsonValue
+    constraints: string[]
+    hints: string[]
+    editorial: string | null
+    discussion: JsonValue | null
+    testcases: JsonValue
+    codeSnippets: JsonValue
+    referenceSolutions: JsonValue
+    createdAt: Date
+    updatedAt: Date
+    _count: ProblemCountAggregateOutputType | null
+    _min: ProblemMinAggregateOutputType | null
+    _max: ProblemMaxAggregateOutputType | null
+  }
+
+  type GetProblemGroupByPayload<T extends ProblemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProblemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProblemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProblemGroupByOutputType[P]>
+            : GetScalarType<T[P], ProblemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProblemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    difficultyLevel?: boolean
+    tags?: boolean
+    userId?: boolean
+    examples?: boolean
+    constraints?: boolean
+    hints?: boolean
+    editorial?: boolean
+    discussion?: boolean
+    testcases?: boolean
+    codeSnippets?: boolean
+    referenceSolutions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
+    _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["problem"]>
+
+  export type ProblemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    difficultyLevel?: boolean
+    tags?: boolean
+    userId?: boolean
+    examples?: boolean
+    constraints?: boolean
+    hints?: boolean
+    editorial?: boolean
+    discussion?: boolean
+    testcases?: boolean
+    codeSnippets?: boolean
+    referenceSolutions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["problem"]>
+
+  export type ProblemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    difficultyLevel?: boolean
+    tags?: boolean
+    userId?: boolean
+    examples?: boolean
+    constraints?: boolean
+    hints?: boolean
+    editorial?: boolean
+    discussion?: boolean
+    testcases?: boolean
+    codeSnippets?: boolean
+    referenceSolutions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["problem"]>
+
+  export type ProblemSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    difficultyLevel?: boolean
+    tags?: boolean
+    userId?: boolean
+    examples?: boolean
+    constraints?: boolean
+    hints?: boolean
+    editorial?: boolean
+    discussion?: boolean
+    testcases?: boolean
+    codeSnippets?: boolean
+    referenceSolutions?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficultyLevel" | "tags" | "userId" | "examples" | "constraints" | "hints" | "editorial" | "discussion" | "testcases" | "codeSnippets" | "referenceSolutions" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+  export type ProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
+    _count?: boolean | ProblemCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type ProblemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $ProblemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Problem"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      solvedBy: Prisma.$SolvedProblemPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string
+      difficultyLevel: $Enums.Difficulty
+      tags: string[]
+      userId: string
+      examples: Prisma.JsonValue
+      constraints: string[]
+      hints: string[]
+      editorial: string | null
+      discussion: Prisma.JsonValue | null
+      testcases: Prisma.JsonValue
+      codeSnippets: Prisma.JsonValue
+      referenceSolutions: Prisma.JsonValue
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["problem"]>
+    composites: {}
+  }
+
+  type ProblemGetPayload<S extends boolean | null | undefined | ProblemDefaultArgs> = $Result.GetResult<Prisma.$ProblemPayload, S>
+
+  type ProblemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProblemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProblemCountAggregateInputType | true
+    }
+
+  export interface ProblemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Problem'], meta: { name: 'Problem' } }
+    /**
+     * Find zero or one Problem that matches the filter.
+     * @param {ProblemFindUniqueArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProblemFindUniqueArgs>(args: SelectSubset<T, ProblemFindUniqueArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Problem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProblemFindUniqueOrThrowArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProblemFindUniqueOrThrowArgs>(args: SelectSubset<T, ProblemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Problem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemFindFirstArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProblemFindFirstArgs>(args?: SelectSubset<T, ProblemFindFirstArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Problem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemFindFirstOrThrowArgs} args - Arguments to find a Problem
+     * @example
+     * // Get one Problem
+     * const problem = await prisma.problem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProblemFindFirstOrThrowArgs>(args?: SelectSubset<T, ProblemFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Problems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Problems
+     * const problems = await prisma.problem.findMany()
+     * 
+     * // Get first 10 Problems
+     * const problems = await prisma.problem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const problemWithIdOnly = await prisma.problem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProblemFindManyArgs>(args?: SelectSubset<T, ProblemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Problem.
+     * @param {ProblemCreateArgs} args - Arguments to create a Problem.
+     * @example
+     * // Create one Problem
+     * const Problem = await prisma.problem.create({
+     *   data: {
+     *     // ... data to create a Problem
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProblemCreateArgs>(args: SelectSubset<T, ProblemCreateArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Problems.
+     * @param {ProblemCreateManyArgs} args - Arguments to create many Problems.
+     * @example
+     * // Create many Problems
+     * const problem = await prisma.problem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProblemCreateManyArgs>(args?: SelectSubset<T, ProblemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Problems and returns the data saved in the database.
+     * @param {ProblemCreateManyAndReturnArgs} args - Arguments to create many Problems.
+     * @example
+     * // Create many Problems
+     * const problem = await prisma.problem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Problems and only return the `id`
+     * const problemWithIdOnly = await prisma.problem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ProblemCreateManyAndReturnArgs>(args?: SelectSubset<T, ProblemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Problem.
+     * @param {ProblemDeleteArgs} args - Arguments to delete one Problem.
+     * @example
+     * // Delete one Problem
+     * const Problem = await prisma.problem.delete({
+     *   where: {
+     *     // ... filter to delete one Problem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProblemDeleteArgs>(args: SelectSubset<T, ProblemDeleteArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Problem.
+     * @param {ProblemUpdateArgs} args - Arguments to update one Problem.
+     * @example
+     * // Update one Problem
+     * const problem = await prisma.problem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProblemUpdateArgs>(args: SelectSubset<T, ProblemUpdateArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Problems.
+     * @param {ProblemDeleteManyArgs} args - Arguments to filter Problems to delete.
+     * @example
+     * // Delete a few Problems
+     * const { count } = await prisma.problem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProblemDeleteManyArgs>(args?: SelectSubset<T, ProblemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Problems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Problems
+     * const problem = await prisma.problem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProblemUpdateManyArgs>(args: SelectSubset<T, ProblemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Problems and returns the data updated in the database.
+     * @param {ProblemUpdateManyAndReturnArgs} args - Arguments to update many Problems.
+     * @example
+     * // Update many Problems
+     * const problem = await prisma.problem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Problems and only return the `id`
+     * const problemWithIdOnly = await prisma.problem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ProblemUpdateManyAndReturnArgs>(args: SelectSubset<T, ProblemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Problem.
+     * @param {ProblemUpsertArgs} args - Arguments to update or create a Problem.
+     * @example
+     * // Update or create a Problem
+     * const problem = await prisma.problem.upsert({
+     *   create: {
+     *     // ... data to create a Problem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Problem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProblemUpsertArgs>(args: SelectSubset<T, ProblemUpsertArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Problems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemCountArgs} args - Arguments to filter Problems to count.
+     * @example
+     * // Count the number of Problems
+     * const count = await prisma.problem.count({
+     *   where: {
+     *     // ... the filter for the Problems we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProblemCountArgs>(
+      args?: Subset<T, ProblemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProblemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Problem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProblemAggregateArgs>(args: Subset<T, ProblemAggregateArgs>): Prisma.PrismaPromise<GetProblemAggregateType<T>>
+
+    /**
+     * Group by Problem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProblemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProblemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProblemGroupByArgs['orderBy'] }
+        : { orderBy?: ProblemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProblemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Problem model
+   */
+  readonly fields: ProblemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Problem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProblemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    solvedBy<T extends Problem$solvedByArgs<ExtArgs> = {}>(args?: Subset<T, Problem$solvedByArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Problem model
+   */
+  interface ProblemFieldRefs {
+    readonly id: FieldRef<"Problem", 'String'>
+    readonly title: FieldRef<"Problem", 'String'>
+    readonly description: FieldRef<"Problem", 'String'>
+    readonly difficultyLevel: FieldRef<"Problem", 'Difficulty'>
+    readonly tags: FieldRef<"Problem", 'String[]'>
+    readonly userId: FieldRef<"Problem", 'String'>
+    readonly examples: FieldRef<"Problem", 'Json'>
+    readonly constraints: FieldRef<"Problem", 'String[]'>
+    readonly hints: FieldRef<"Problem", 'String[]'>
+    readonly editorial: FieldRef<"Problem", 'String'>
+    readonly discussion: FieldRef<"Problem", 'Json'>
+    readonly testcases: FieldRef<"Problem", 'Json'>
+    readonly codeSnippets: FieldRef<"Problem", 'Json'>
+    readonly referenceSolutions: FieldRef<"Problem", 'Json'>
+    readonly createdAt: FieldRef<"Problem", 'DateTime'>
+    readonly updatedAt: FieldRef<"Problem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Problem findUnique
+   */
+  export type ProblemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     */
+    where: ProblemWhereUniqueInput
+  }
+
+  /**
+   * Problem findUniqueOrThrow
+   */
+  export type ProblemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     */
+    where: ProblemWhereUniqueInput
+  }
+
+  /**
+   * Problem findFirst
+   */
+  export type ProblemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     */
+    where?: ProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Problems to fetch.
+     */
+    orderBy?: ProblemOrderByWithRelationInput | ProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Problems.
+     */
+    cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Problems.
+     */
+    distinct?: ProblemScalarFieldEnum | ProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Problem findFirstOrThrow
+   */
+  export type ProblemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problem to fetch.
+     */
+    where?: ProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Problems to fetch.
+     */
+    orderBy?: ProblemOrderByWithRelationInput | ProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Problems.
+     */
+    cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Problems.
+     */
+    distinct?: ProblemScalarFieldEnum | ProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Problem findMany
+   */
+  export type ProblemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which Problems to fetch.
+     */
+    where?: ProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Problems to fetch.
+     */
+    orderBy?: ProblemOrderByWithRelationInput | ProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Problems.
+     */
+    cursor?: ProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Problems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Problems.
+     */
+    skip?: number
+    distinct?: ProblemScalarFieldEnum | ProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Problem create
+   */
+  export type ProblemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Problem.
+     */
+    data: XOR<ProblemCreateInput, ProblemUncheckedCreateInput>
+  }
+
+  /**
+   * Problem createMany
+   */
+  export type ProblemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Problems.
+     */
+    data: ProblemCreateManyInput | ProblemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Problem createManyAndReturn
+   */
+  export type ProblemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * The data used to create many Problems.
+     */
+    data: ProblemCreateManyInput | ProblemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Problem update
+   */
+  export type ProblemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Problem.
+     */
+    data: XOR<ProblemUpdateInput, ProblemUncheckedUpdateInput>
+    /**
+     * Choose, which Problem to update.
+     */
+    where: ProblemWhereUniqueInput
+  }
+
+  /**
+   * Problem updateMany
+   */
+  export type ProblemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Problems.
+     */
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which Problems to update
+     */
+    where?: ProblemWhereInput
+    /**
+     * Limit how many Problems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Problem updateManyAndReturn
+   */
+  export type ProblemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * The data used to update Problems.
+     */
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which Problems to update
+     */
+    where?: ProblemWhereInput
+    /**
+     * Limit how many Problems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Problem upsert
+   */
+  export type ProblemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Problem to update in case it exists.
+     */
+    where: ProblemWhereUniqueInput
+    /**
+     * In case the Problem found by the `where` argument doesn't exist, create a new Problem with this data.
+     */
+    create: XOR<ProblemCreateInput, ProblemUncheckedCreateInput>
+    /**
+     * In case the Problem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProblemUpdateInput, ProblemUncheckedUpdateInput>
+  }
+
+  /**
+   * Problem delete
+   */
+  export type ProblemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+    /**
+     * Filter which Problem to delete.
+     */
+    where: ProblemWhereUniqueInput
+  }
+
+  /**
+   * Problem deleteMany
+   */
+  export type ProblemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Problems to delete
+     */
+    where?: ProblemWhereInput
+    /**
+     * Limit how many Problems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Problem.solvedBy
+   */
+  export type Problem$solvedByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    where?: SolvedProblemWhereInput
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    cursor?: SolvedProblemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SolvedProblemScalarFieldEnum | SolvedProblemScalarFieldEnum[]
+  }
+
+  /**
+   * Problem without action
+   */
+  export type ProblemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Problem
+     */
+    select?: ProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Problem
+     */
+    omit?: ProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProblemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SolvedProblem
+   */
+
+  export type AggregateSolvedProblem = {
+    _count: SolvedProblemCountAggregateOutputType | null
+    _min: SolvedProblemMinAggregateOutputType | null
+    _max: SolvedProblemMaxAggregateOutputType | null
+  }
+
+  export type SolvedProblemMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    solvedAt: Date | null
+  }
+
+  export type SolvedProblemMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    problemId: string | null
+    solvedAt: Date | null
+  }
+
+  export type SolvedProblemCountAggregateOutputType = {
+    id: number
+    userId: number
+    problemId: number
+    solvedAt: number
+    _all: number
+  }
+
+
+  export type SolvedProblemMinAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    solvedAt?: true
+  }
+
+  export type SolvedProblemMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    solvedAt?: true
+  }
+
+  export type SolvedProblemCountAggregateInputType = {
+    id?: true
+    userId?: true
+    problemId?: true
+    solvedAt?: true
+    _all?: true
+  }
+
+  export type SolvedProblemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SolvedProblem to aggregate.
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SolvedProblems to fetch.
+     */
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SolvedProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SolvedProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SolvedProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SolvedProblems
+    **/
+    _count?: true | SolvedProblemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SolvedProblemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SolvedProblemMaxAggregateInputType
+  }
+
+  export type GetSolvedProblemAggregateType<T extends SolvedProblemAggregateArgs> = {
+        [P in keyof T & keyof AggregateSolvedProblem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSolvedProblem[P]>
+      : GetScalarType<T[P], AggregateSolvedProblem[P]>
+  }
+
+
+
+
+  export type SolvedProblemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SolvedProblemWhereInput
+    orderBy?: SolvedProblemOrderByWithAggregationInput | SolvedProblemOrderByWithAggregationInput[]
+    by: SolvedProblemScalarFieldEnum[] | SolvedProblemScalarFieldEnum
+    having?: SolvedProblemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SolvedProblemCountAggregateInputType | true
+    _min?: SolvedProblemMinAggregateInputType
+    _max?: SolvedProblemMaxAggregateInputType
+  }
+
+  export type SolvedProblemGroupByOutputType = {
+    id: string
+    userId: string
+    problemId: string
+    solvedAt: Date
+    _count: SolvedProblemCountAggregateOutputType | null
+    _min: SolvedProblemMinAggregateOutputType | null
+    _max: SolvedProblemMaxAggregateOutputType | null
+  }
+
+  type GetSolvedProblemGroupByPayload<T extends SolvedProblemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SolvedProblemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SolvedProblemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SolvedProblemGroupByOutputType[P]>
+            : GetScalarType<T[P], SolvedProblemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SolvedProblemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    solvedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["solvedProblem"]>
+
+  export type SolvedProblemSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    solvedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["solvedProblem"]>
+
+  export type SolvedProblemSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    solvedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["solvedProblem"]>
+
+  export type SolvedProblemSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    problemId?: boolean
+    solvedAt?: boolean
+  }
+
+  export type SolvedProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "problemId" | "solvedAt", ExtArgs["result"]["solvedProblem"]>
+  export type SolvedProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type SolvedProblemIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+  export type SolvedProblemIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+    problem?: boolean | ProblemDefaultArgs<ExtArgs>
+  }
+
+  export type $SolvedProblemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SolvedProblem"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+      problem: Prisma.$ProblemPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      problemId: string
+      solvedAt: Date
+    }, ExtArgs["result"]["solvedProblem"]>
+    composites: {}
+  }
+
+  type SolvedProblemGetPayload<S extends boolean | null | undefined | SolvedProblemDefaultArgs> = $Result.GetResult<Prisma.$SolvedProblemPayload, S>
+
+  type SolvedProblemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SolvedProblemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SolvedProblemCountAggregateInputType | true
+    }
+
+  export interface SolvedProblemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SolvedProblem'], meta: { name: 'SolvedProblem' } }
+    /**
+     * Find zero or one SolvedProblem that matches the filter.
+     * @param {SolvedProblemFindUniqueArgs} args - Arguments to find a SolvedProblem
+     * @example
+     * // Get one SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SolvedProblemFindUniqueArgs>(args: SelectSubset<T, SolvedProblemFindUniqueArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SolvedProblem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SolvedProblemFindUniqueOrThrowArgs} args - Arguments to find a SolvedProblem
+     * @example
+     * // Get one SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SolvedProblemFindUniqueOrThrowArgs>(args: SelectSubset<T, SolvedProblemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SolvedProblem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemFindFirstArgs} args - Arguments to find a SolvedProblem
+     * @example
+     * // Get one SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SolvedProblemFindFirstArgs>(args?: SelectSubset<T, SolvedProblemFindFirstArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SolvedProblem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemFindFirstOrThrowArgs} args - Arguments to find a SolvedProblem
+     * @example
+     * // Get one SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SolvedProblemFindFirstOrThrowArgs>(args?: SelectSubset<T, SolvedProblemFindFirstOrThrowArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SolvedProblems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SolvedProblems
+     * const solvedProblems = await prisma.solvedProblem.findMany()
+     * 
+     * // Get first 10 SolvedProblems
+     * const solvedProblems = await prisma.solvedProblem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const solvedProblemWithIdOnly = await prisma.solvedProblem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SolvedProblemFindManyArgs>(args?: SelectSubset<T, SolvedProblemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SolvedProblem.
+     * @param {SolvedProblemCreateArgs} args - Arguments to create a SolvedProblem.
+     * @example
+     * // Create one SolvedProblem
+     * const SolvedProblem = await prisma.solvedProblem.create({
+     *   data: {
+     *     // ... data to create a SolvedProblem
+     *   }
+     * })
+     * 
+     */
+    create<T extends SolvedProblemCreateArgs>(args: SelectSubset<T, SolvedProblemCreateArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SolvedProblems.
+     * @param {SolvedProblemCreateManyArgs} args - Arguments to create many SolvedProblems.
+     * @example
+     * // Create many SolvedProblems
+     * const solvedProblem = await prisma.solvedProblem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SolvedProblemCreateManyArgs>(args?: SelectSubset<T, SolvedProblemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SolvedProblems and returns the data saved in the database.
+     * @param {SolvedProblemCreateManyAndReturnArgs} args - Arguments to create many SolvedProblems.
+     * @example
+     * // Create many SolvedProblems
+     * const solvedProblem = await prisma.solvedProblem.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SolvedProblems and only return the `id`
+     * const solvedProblemWithIdOnly = await prisma.solvedProblem.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SolvedProblemCreateManyAndReturnArgs>(args?: SelectSubset<T, SolvedProblemCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SolvedProblem.
+     * @param {SolvedProblemDeleteArgs} args - Arguments to delete one SolvedProblem.
+     * @example
+     * // Delete one SolvedProblem
+     * const SolvedProblem = await prisma.solvedProblem.delete({
+     *   where: {
+     *     // ... filter to delete one SolvedProblem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SolvedProblemDeleteArgs>(args: SelectSubset<T, SolvedProblemDeleteArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SolvedProblem.
+     * @param {SolvedProblemUpdateArgs} args - Arguments to update one SolvedProblem.
+     * @example
+     * // Update one SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SolvedProblemUpdateArgs>(args: SelectSubset<T, SolvedProblemUpdateArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SolvedProblems.
+     * @param {SolvedProblemDeleteManyArgs} args - Arguments to filter SolvedProblems to delete.
+     * @example
+     * // Delete a few SolvedProblems
+     * const { count } = await prisma.solvedProblem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SolvedProblemDeleteManyArgs>(args?: SelectSubset<T, SolvedProblemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SolvedProblems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SolvedProblems
+     * const solvedProblem = await prisma.solvedProblem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SolvedProblemUpdateManyArgs>(args: SelectSubset<T, SolvedProblemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SolvedProblems and returns the data updated in the database.
+     * @param {SolvedProblemUpdateManyAndReturnArgs} args - Arguments to update many SolvedProblems.
+     * @example
+     * // Update many SolvedProblems
+     * const solvedProblem = await prisma.solvedProblem.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SolvedProblems and only return the `id`
+     * const solvedProblemWithIdOnly = await prisma.solvedProblem.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SolvedProblemUpdateManyAndReturnArgs>(args: SelectSubset<T, SolvedProblemUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SolvedProblem.
+     * @param {SolvedProblemUpsertArgs} args - Arguments to update or create a SolvedProblem.
+     * @example
+     * // Update or create a SolvedProblem
+     * const solvedProblem = await prisma.solvedProblem.upsert({
+     *   create: {
+     *     // ... data to create a SolvedProblem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SolvedProblem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SolvedProblemUpsertArgs>(args: SelectSubset<T, SolvedProblemUpsertArgs<ExtArgs>>): Prisma__SolvedProblemClient<$Result.GetResult<Prisma.$SolvedProblemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SolvedProblems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemCountArgs} args - Arguments to filter SolvedProblems to count.
+     * @example
+     * // Count the number of SolvedProblems
+     * const count = await prisma.solvedProblem.count({
+     *   where: {
+     *     // ... the filter for the SolvedProblems we want to count
+     *   }
+     * })
+    **/
+    count<T extends SolvedProblemCountArgs>(
+      args?: Subset<T, SolvedProblemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SolvedProblemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SolvedProblem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SolvedProblemAggregateArgs>(args: Subset<T, SolvedProblemAggregateArgs>): Prisma.PrismaPromise<GetSolvedProblemAggregateType<T>>
+
+    /**
+     * Group by SolvedProblem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SolvedProblemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SolvedProblemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SolvedProblemGroupByArgs['orderBy'] }
+        : { orderBy?: SolvedProblemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SolvedProblemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSolvedProblemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SolvedProblem model
+   */
+  readonly fields: SolvedProblemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SolvedProblem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SolvedProblemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    problem<T extends ProblemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProblemDefaultArgs<ExtArgs>>): Prisma__ProblemClient<$Result.GetResult<Prisma.$ProblemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SolvedProblem model
+   */
+  interface SolvedProblemFieldRefs {
+    readonly id: FieldRef<"SolvedProblem", 'String'>
+    readonly userId: FieldRef<"SolvedProblem", 'String'>
+    readonly problemId: FieldRef<"SolvedProblem", 'String'>
+    readonly solvedAt: FieldRef<"SolvedProblem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SolvedProblem findUnique
+   */
+  export type SolvedProblemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which SolvedProblem to fetch.
+     */
+    where: SolvedProblemWhereUniqueInput
+  }
+
+  /**
+   * SolvedProblem findUniqueOrThrow
+   */
+  export type SolvedProblemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which SolvedProblem to fetch.
+     */
+    where: SolvedProblemWhereUniqueInput
+  }
+
+  /**
+   * SolvedProblem findFirst
+   */
+  export type SolvedProblemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which SolvedProblem to fetch.
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SolvedProblems to fetch.
+     */
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SolvedProblems.
+     */
+    cursor?: SolvedProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SolvedProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SolvedProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SolvedProblems.
+     */
+    distinct?: SolvedProblemScalarFieldEnum | SolvedProblemScalarFieldEnum[]
+  }
+
+  /**
+   * SolvedProblem findFirstOrThrow
+   */
+  export type SolvedProblemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which SolvedProblem to fetch.
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SolvedProblems to fetch.
+     */
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SolvedProblems.
+     */
+    cursor?: SolvedProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SolvedProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SolvedProblems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SolvedProblems.
+     */
+    distinct?: SolvedProblemScalarFieldEnum | SolvedProblemScalarFieldEnum[]
+  }
+
+  /**
+   * SolvedProblem findMany
+   */
+  export type SolvedProblemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter, which SolvedProblems to fetch.
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SolvedProblems to fetch.
+     */
+    orderBy?: SolvedProblemOrderByWithRelationInput | SolvedProblemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SolvedProblems.
+     */
+    cursor?: SolvedProblemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SolvedProblems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SolvedProblems.
+     */
+    skip?: number
+    distinct?: SolvedProblemScalarFieldEnum | SolvedProblemScalarFieldEnum[]
+  }
+
+  /**
+   * SolvedProblem create
+   */
+  export type SolvedProblemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SolvedProblem.
+     */
+    data: XOR<SolvedProblemCreateInput, SolvedProblemUncheckedCreateInput>
+  }
+
+  /**
+   * SolvedProblem createMany
+   */
+  export type SolvedProblemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SolvedProblems.
+     */
+    data: SolvedProblemCreateManyInput | SolvedProblemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SolvedProblem createManyAndReturn
+   */
+  export type SolvedProblemCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * The data used to create many SolvedProblems.
+     */
+    data: SolvedProblemCreateManyInput | SolvedProblemCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SolvedProblem update
+   */
+  export type SolvedProblemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SolvedProblem.
+     */
+    data: XOR<SolvedProblemUpdateInput, SolvedProblemUncheckedUpdateInput>
+    /**
+     * Choose, which SolvedProblem to update.
+     */
+    where: SolvedProblemWhereUniqueInput
+  }
+
+  /**
+   * SolvedProblem updateMany
+   */
+  export type SolvedProblemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SolvedProblems.
+     */
+    data: XOR<SolvedProblemUpdateManyMutationInput, SolvedProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which SolvedProblems to update
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * Limit how many SolvedProblems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SolvedProblem updateManyAndReturn
+   */
+  export type SolvedProblemUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * The data used to update SolvedProblems.
+     */
+    data: XOR<SolvedProblemUpdateManyMutationInput, SolvedProblemUncheckedUpdateManyInput>
+    /**
+     * Filter which SolvedProblems to update
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * Limit how many SolvedProblems to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SolvedProblem upsert
+   */
+  export type SolvedProblemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SolvedProblem to update in case it exists.
+     */
+    where: SolvedProblemWhereUniqueInput
+    /**
+     * In case the SolvedProblem found by the `where` argument doesn't exist, create a new SolvedProblem with this data.
+     */
+    create: XOR<SolvedProblemCreateInput, SolvedProblemUncheckedCreateInput>
+    /**
+     * In case the SolvedProblem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SolvedProblemUpdateInput, SolvedProblemUncheckedUpdateInput>
+  }
+
+  /**
+   * SolvedProblem delete
+   */
+  export type SolvedProblemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+    /**
+     * Filter which SolvedProblem to delete.
+     */
+    where: SolvedProblemWhereUniqueInput
+  }
+
+  /**
+   * SolvedProblem deleteMany
+   */
+  export type SolvedProblemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SolvedProblems to delete
+     */
+    where?: SolvedProblemWhereInput
+    /**
+     * Limit how many SolvedProblems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SolvedProblem without action
+   */
+  export type SolvedProblemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SolvedProblem
+     */
+    select?: SolvedProblemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SolvedProblem
+     */
+    omit?: SolvedProblemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SolvedProblemInclude<ExtArgs> | null
+>>>>>>> dev
   }
 
 
@@ -1941,6 +4766,12 @@ export namespace Prisma {
     image: 'image',
     role: 'role',
     password: 'password',
+<<<<<<< HEAD
+=======
+    coins: 'coins',
+    streak: 'streak',
+    badges: 'badges',
+>>>>>>> dev
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -1948,6 +4779,41 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+<<<<<<< HEAD
+=======
+  export const ProblemScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    difficultyLevel: 'difficultyLevel',
+    tags: 'tags',
+    userId: 'userId',
+    examples: 'examples',
+    constraints: 'constraints',
+    hints: 'hints',
+    editorial: 'editorial',
+    discussion: 'discussion',
+    testcases: 'testcases',
+    codeSnippets: 'codeSnippets',
+    referenceSolutions: 'referenceSolutions',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProblemScalarFieldEnum = (typeof ProblemScalarFieldEnum)[keyof typeof ProblemScalarFieldEnum]
+
+
+  export const SolvedProblemScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    problemId: 'problemId',
+    solvedAt: 'solvedAt'
+  };
+
+  export type SolvedProblemScalarFieldEnum = (typeof SolvedProblemScalarFieldEnum)[keyof typeof SolvedProblemScalarFieldEnum]
+
+
+>>>>>>> dev
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -1956,6 +4822,24 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+<<<<<<< HEAD
+=======
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+>>>>>>> dev
   export const QueryMode: {
     default: 'default',
     insensitive: 'insensitive'
@@ -1964,6 +4848,18 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+<<<<<<< HEAD
+=======
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+>>>>>>> dev
   export const NullsOrder: {
     first: 'first',
     last: 'last'
@@ -2006,6 +4902,37 @@ export namespace Prisma {
 
 
   /**
+<<<<<<< HEAD
+=======
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+    
+
+
+  /**
+>>>>>>> dev
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -2020,16 +4947,42 @@ export namespace Prisma {
 
 
   /**
+<<<<<<< HEAD
    * Reference to a field of type 'Int'
    */
   export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+=======
+   * Reference to a field of type 'Difficulty'
+   */
+  export type EnumDifficultyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Difficulty'>
+>>>>>>> dev
     
 
 
   /**
+<<<<<<< HEAD
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+=======
+   * Reference to a field of type 'Difficulty[]'
+   */
+  export type ListEnumDifficultyFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Difficulty[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+>>>>>>> dev
     
   /**
    * Deep Input Types
@@ -2046,8 +4999,18 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+<<<<<<< HEAD
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+=======
+    coins?: IntFilter<"User"> | number
+    streak?: IntFilter<"User"> | number
+    badges?: JsonFilter<"User">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    problems?: ProblemListRelationFilter
+    solvedProblems?: SolvedProblemListRelationFilter
+>>>>>>> dev
   }
 
   export type UserOrderByWithRelationInput = {
@@ -2057,8 +5020,18 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+<<<<<<< HEAD
     createdAt?: SortOrder
     updatedAt?: SortOrder
+=======
+    coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    problems?: ProblemOrderByRelationAggregateInput
+    solvedProblems?: SolvedProblemOrderByRelationAggregateInput
+>>>>>>> dev
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -2071,8 +5044,18 @@ export namespace Prisma {
     image?: StringNullableFilter<"User"> | string | null
     role?: EnumUserRoleFilter<"User"> | $Enums.UserRole
     password?: StringFilter<"User"> | string
+<<<<<<< HEAD
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+=======
+    coins?: IntFilter<"User"> | number
+    streak?: IntFilter<"User"> | number
+    badges?: JsonFilter<"User">
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+    problems?: ProblemListRelationFilter
+    solvedProblems?: SolvedProblemListRelationFilter
+>>>>>>> dev
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -2082,11 +5065,24 @@ export namespace Prisma {
     image?: SortOrderInput | SortOrder
     role?: SortOrder
     password?: SortOrder
+<<<<<<< HEAD
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+=======
+    coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
+    _max?: UserMaxOrderByAggregateInput
+    _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
+>>>>>>> dev
   }
 
   export type UserScalarWhereWithAggregatesInput = {
@@ -2099,10 +5095,185 @@ export namespace Prisma {
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     role?: EnumUserRoleWithAggregatesFilter<"User"> | $Enums.UserRole
     password?: StringWithAggregatesFilter<"User"> | string
+<<<<<<< HEAD
+=======
+    coins?: IntWithAggregatesFilter<"User"> | number
+    streak?: IntWithAggregatesFilter<"User"> | number
+    badges?: JsonWithAggregatesFilter<"User">
+>>>>>>> dev
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+<<<<<<< HEAD
+=======
+  export type ProblemWhereInput = {
+    AND?: ProblemWhereInput | ProblemWhereInput[]
+    OR?: ProblemWhereInput[]
+    NOT?: ProblemWhereInput | ProblemWhereInput[]
+    id?: StringFilter<"Problem"> | string
+    title?: StringFilter<"Problem"> | string
+    description?: StringFilter<"Problem"> | string
+    difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    tags?: StringNullableListFilter<"Problem">
+    userId?: StringFilter<"Problem"> | string
+    examples?: JsonFilter<"Problem">
+    constraints?: StringNullableListFilter<"Problem">
+    hints?: StringNullableListFilter<"Problem">
+    editorial?: StringNullableFilter<"Problem"> | string | null
+    discussion?: JsonNullableFilter<"Problem">
+    testcases?: JsonFilter<"Problem">
+    codeSnippets?: JsonFilter<"Problem">
+    referenceSolutions?: JsonFilter<"Problem">
+    createdAt?: DateTimeFilter<"Problem"> | Date | string
+    updatedAt?: DateTimeFilter<"Problem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    solvedBy?: SolvedProblemListRelationFilter
+  }
+
+  export type ProblemOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    difficultyLevel?: SortOrder
+    tags?: SortOrder
+    userId?: SortOrder
+    examples?: SortOrder
+    constraints?: SortOrder
+    hints?: SortOrder
+    editorial?: SortOrderInput | SortOrder
+    discussion?: SortOrderInput | SortOrder
+    testcases?: SortOrder
+    codeSnippets?: SortOrder
+    referenceSolutions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    solvedBy?: SolvedProblemOrderByRelationAggregateInput
+  }
+
+  export type ProblemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ProblemWhereInput | ProblemWhereInput[]
+    OR?: ProblemWhereInput[]
+    NOT?: ProblemWhereInput | ProblemWhereInput[]
+    title?: StringFilter<"Problem"> | string
+    description?: StringFilter<"Problem"> | string
+    difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    tags?: StringNullableListFilter<"Problem">
+    userId?: StringFilter<"Problem"> | string
+    examples?: JsonFilter<"Problem">
+    constraints?: StringNullableListFilter<"Problem">
+    hints?: StringNullableListFilter<"Problem">
+    editorial?: StringNullableFilter<"Problem"> | string | null
+    discussion?: JsonNullableFilter<"Problem">
+    testcases?: JsonFilter<"Problem">
+    codeSnippets?: JsonFilter<"Problem">
+    referenceSolutions?: JsonFilter<"Problem">
+    createdAt?: DateTimeFilter<"Problem"> | Date | string
+    updatedAt?: DateTimeFilter<"Problem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    solvedBy?: SolvedProblemListRelationFilter
+  }, "id">
+
+  export type ProblemOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    difficultyLevel?: SortOrder
+    tags?: SortOrder
+    userId?: SortOrder
+    examples?: SortOrder
+    constraints?: SortOrder
+    hints?: SortOrder
+    editorial?: SortOrderInput | SortOrder
+    discussion?: SortOrderInput | SortOrder
+    testcases?: SortOrder
+    codeSnippets?: SortOrder
+    referenceSolutions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProblemCountOrderByAggregateInput
+    _max?: ProblemMaxOrderByAggregateInput
+    _min?: ProblemMinOrderByAggregateInput
+  }
+
+  export type ProblemScalarWhereWithAggregatesInput = {
+    AND?: ProblemScalarWhereWithAggregatesInput | ProblemScalarWhereWithAggregatesInput[]
+    OR?: ProblemScalarWhereWithAggregatesInput[]
+    NOT?: ProblemScalarWhereWithAggregatesInput | ProblemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Problem"> | string
+    title?: StringWithAggregatesFilter<"Problem"> | string
+    description?: StringWithAggregatesFilter<"Problem"> | string
+    difficultyLevel?: EnumDifficultyWithAggregatesFilter<"Problem"> | $Enums.Difficulty
+    tags?: StringNullableListFilter<"Problem">
+    userId?: StringWithAggregatesFilter<"Problem"> | string
+    examples?: JsonWithAggregatesFilter<"Problem">
+    constraints?: StringNullableListFilter<"Problem">
+    hints?: StringNullableListFilter<"Problem">
+    editorial?: StringNullableWithAggregatesFilter<"Problem"> | string | null
+    discussion?: JsonNullableWithAggregatesFilter<"Problem">
+    testcases?: JsonWithAggregatesFilter<"Problem">
+    codeSnippets?: JsonWithAggregatesFilter<"Problem">
+    referenceSolutions?: JsonWithAggregatesFilter<"Problem">
+    createdAt?: DateTimeWithAggregatesFilter<"Problem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Problem"> | Date | string
+  }
+
+  export type SolvedProblemWhereInput = {
+    AND?: SolvedProblemWhereInput | SolvedProblemWhereInput[]
+    OR?: SolvedProblemWhereInput[]
+    NOT?: SolvedProblemWhereInput | SolvedProblemWhereInput[]
+    id?: StringFilter<"SolvedProblem"> | string
+    userId?: StringFilter<"SolvedProblem"> | string
+    problemId?: StringFilter<"SolvedProblem"> | string
+    solvedAt?: DateTimeFilter<"SolvedProblem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }
+
+  export type SolvedProblemOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    solvedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    problem?: ProblemOrderByWithRelationInput
+  }
+
+  export type SolvedProblemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: SolvedProblemWhereInput | SolvedProblemWhereInput[]
+    OR?: SolvedProblemWhereInput[]
+    NOT?: SolvedProblemWhereInput | SolvedProblemWhereInput[]
+    userId?: StringFilter<"SolvedProblem"> | string
+    problemId?: StringFilter<"SolvedProblem"> | string
+    solvedAt?: DateTimeFilter<"SolvedProblem"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    problem?: XOR<ProblemScalarRelationFilter, ProblemWhereInput>
+  }, "id">
+
+  export type SolvedProblemOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    solvedAt?: SortOrder
+    _count?: SolvedProblemCountOrderByAggregateInput
+    _max?: SolvedProblemMaxOrderByAggregateInput
+    _min?: SolvedProblemMinOrderByAggregateInput
+  }
+
+  export type SolvedProblemScalarWhereWithAggregatesInput = {
+    AND?: SolvedProblemScalarWhereWithAggregatesInput | SolvedProblemScalarWhereWithAggregatesInput[]
+    OR?: SolvedProblemScalarWhereWithAggregatesInput[]
+    NOT?: SolvedProblemScalarWhereWithAggregatesInput | SolvedProblemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SolvedProblem"> | string
+    userId?: StringWithAggregatesFilter<"SolvedProblem"> | string
+    problemId?: StringWithAggregatesFilter<"SolvedProblem"> | string
+    solvedAt?: DateTimeWithAggregatesFilter<"SolvedProblem"> | Date | string
+  }
+
+>>>>>>> dev
   export type UserCreateInput = {
     id?: string
     name?: string | null
@@ -2110,8 +5281,18 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+<<<<<<< HEAD
     createdAt?: Date | string
     updatedAt?: Date | string
+=======
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemCreateNestedManyWithoutUserInput
+    solvedProblems?: SolvedProblemCreateNestedManyWithoutUserInput
+>>>>>>> dev
   }
 
   export type UserUncheckedCreateInput = {
@@ -2121,8 +5302,18 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+<<<<<<< HEAD
     createdAt?: Date | string
     updatedAt?: Date | string
+=======
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+    solvedProblems?: SolvedProblemUncheckedCreateNestedManyWithoutUserInput
+>>>>>>> dev
   }
 
   export type UserUpdateInput = {
@@ -2132,8 +5323,18 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+<<<<<<< HEAD
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+=======
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+    solvedProblems?: SolvedProblemUpdateManyWithoutUserNestedInput
+>>>>>>> dev
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2143,8 +5344,18 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+<<<<<<< HEAD
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+=======
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+    solvedProblems?: SolvedProblemUncheckedUpdateManyWithoutUserNestedInput
+>>>>>>> dev
   }
 
   export type UserCreateManyInput = {
@@ -2154,6 +5365,12 @@ export namespace Prisma {
     image?: string | null
     role?: $Enums.UserRole
     password: string
+<<<<<<< HEAD
+=======
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+>>>>>>> dev
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -2165,6 +5382,12 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+<<<<<<< HEAD
+=======
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+>>>>>>> dev
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2176,10 +5399,202 @@ export namespace Prisma {
     image?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
     password?: StringFieldUpdateOperationsInput | string
+<<<<<<< HEAD
+=======
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+>>>>>>> dev
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+<<<<<<< HEAD
+=======
+  export type ProblemCreateInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProblemsInput
+    solvedBy?: SolvedProblemCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    solvedBy?: SolvedProblemUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+    solvedBy?: SolvedProblemUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedBy?: SolvedProblemUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemCreateManyInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProblemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProblemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemCreateInput = {
+    id?: string
+    solvedAt?: Date | string
+    user: UserCreateNestedOneWithoutSolvedProblemsInput
+    problem: ProblemCreateNestedOneWithoutSolvedByInput
+  }
+
+  export type SolvedProblemUncheckedCreateInput = {
+    id?: string
+    userId: string
+    problemId: string
+    solvedAt?: Date | string
+  }
+
+  export type SolvedProblemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSolvedProblemsNestedInput
+    problem?: ProblemUpdateOneRequiredWithoutSolvedByNestedInput
+  }
+
+  export type SolvedProblemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemCreateManyInput = {
+    id?: string
+    userId: string
+    problemId: string
+    solvedAt?: Date | string
+  }
+
+  export type SolvedProblemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+>>>>>>> dev
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2217,6 +5632,43 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+<<<<<<< HEAD
+=======
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+>>>>>>> dev
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2228,11 +5680,37 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+<<<<<<< HEAD
+=======
+  export type ProblemListRelationFilter = {
+    every?: ProblemWhereInput
+    some?: ProblemWhereInput
+    none?: ProblemWhereInput
+  }
+
+  export type SolvedProblemListRelationFilter = {
+    every?: SolvedProblemWhereInput
+    some?: SolvedProblemWhereInput
+    none?: SolvedProblemWhereInput
+  }
+
+>>>>>>> dev
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
+<<<<<<< HEAD
+=======
+  export type ProblemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SolvedProblemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+>>>>>>> dev
   export type UserCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -2240,10 +5718,24 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+<<<<<<< HEAD
+=======
+    coins?: SortOrder
+    streak?: SortOrder
+    badges?: SortOrder
+>>>>>>> dev
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
+<<<<<<< HEAD
+=======
+  export type UserAvgOrderByAggregateInput = {
+    coins?: SortOrder
+    streak?: SortOrder
+  }
+
+>>>>>>> dev
   export type UserMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -2251,6 +5743,11 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+<<<<<<< HEAD
+=======
+    coins?: SortOrder
+    streak?: SortOrder
+>>>>>>> dev
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -2262,10 +5759,23 @@ export namespace Prisma {
     image?: SortOrder
     role?: SortOrder
     password?: SortOrder
+<<<<<<< HEAD
+=======
+    coins?: SortOrder
+    streak?: SortOrder
+>>>>>>> dev
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
+<<<<<<< HEAD
+=======
+  export type UserSumOrderByAggregateInput = {
+    coins?: SortOrder
+    streak?: SortOrder
+  }
+
+>>>>>>> dev
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2312,6 +5822,51 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
+<<<<<<< HEAD
+=======
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+>>>>>>> dev
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2326,6 +5881,183 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+<<<<<<< HEAD
+=======
+  export type EnumDifficultyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Difficulty | EnumDifficultyFieldRefInput<$PrismaModel>
+    in?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    not?: NestedEnumDifficultyFilter<$PrismaModel> | $Enums.Difficulty
+  }
+
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
+  }
+
+  export type ProblemCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    difficultyLevel?: SortOrder
+    tags?: SortOrder
+    userId?: SortOrder
+    examples?: SortOrder
+    constraints?: SortOrder
+    hints?: SortOrder
+    editorial?: SortOrder
+    discussion?: SortOrder
+    testcases?: SortOrder
+    codeSnippets?: SortOrder
+    referenceSolutions?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProblemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    difficultyLevel?: SortOrder
+    userId?: SortOrder
+    editorial?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProblemMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    difficultyLevel?: SortOrder
+    userId?: SortOrder
+    editorial?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnumDifficultyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Difficulty | EnumDifficultyFieldRefInput<$PrismaModel>
+    in?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    not?: NestedEnumDifficultyWithAggregatesFilter<$PrismaModel> | $Enums.Difficulty
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDifficultyFilter<$PrismaModel>
+    _max?: NestedEnumDifficultyFilter<$PrismaModel>
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
+  }
+
+  export type ProblemScalarRelationFilter = {
+    is?: ProblemWhereInput
+    isNot?: ProblemWhereInput
+  }
+
+  export type SolvedProblemCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    solvedAt?: SortOrder
+  }
+
+  export type SolvedProblemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    solvedAt?: SortOrder
+  }
+
+  export type SolvedProblemMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    problemId?: SortOrder
+    solvedAt?: SortOrder
+  }
+
+  export type ProblemCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
+    createMany?: ProblemCreateManyUserInputEnvelope
+    connect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+  }
+
+  export type SolvedProblemCreateNestedManyWithoutUserInput = {
+    create?: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput> | SolvedProblemCreateWithoutUserInput[] | SolvedProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutUserInput | SolvedProblemCreateOrConnectWithoutUserInput[]
+    createMany?: SolvedProblemCreateManyUserInputEnvelope
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+  }
+
+  export type ProblemUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
+    createMany?: ProblemCreateManyUserInputEnvelope
+    connect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+  }
+
+  export type SolvedProblemUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput> | SolvedProblemCreateWithoutUserInput[] | SolvedProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutUserInput | SolvedProblemCreateOrConnectWithoutUserInput[]
+    createMany?: SolvedProblemCreateManyUserInputEnvelope
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+  }
+
+>>>>>>> dev
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2338,10 +6070,195 @@ export namespace Prisma {
     set?: $Enums.UserRole
   }
 
+<<<<<<< HEAD
+=======
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+>>>>>>> dev
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
+<<<<<<< HEAD
+=======
+  export type ProblemUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
+    upsert?: ProblemUpsertWithWhereUniqueWithoutUserInput | ProblemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProblemCreateManyUserInputEnvelope
+    set?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    disconnect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    delete?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    connect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    update?: ProblemUpdateWithWhereUniqueWithoutUserInput | ProblemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProblemUpdateManyWithWhereWithoutUserInput | ProblemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProblemScalarWhereInput | ProblemScalarWhereInput[]
+  }
+
+  export type SolvedProblemUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput> | SolvedProblemCreateWithoutUserInput[] | SolvedProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutUserInput | SolvedProblemCreateOrConnectWithoutUserInput[]
+    upsert?: SolvedProblemUpsertWithWhereUniqueWithoutUserInput | SolvedProblemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SolvedProblemCreateManyUserInputEnvelope
+    set?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    disconnect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    delete?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    update?: SolvedProblemUpdateWithWhereUniqueWithoutUserInput | SolvedProblemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SolvedProblemUpdateManyWithWhereWithoutUserInput | SolvedProblemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+  }
+
+  export type ProblemUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput> | ProblemCreateWithoutUserInput[] | ProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: ProblemCreateOrConnectWithoutUserInput | ProblemCreateOrConnectWithoutUserInput[]
+    upsert?: ProblemUpsertWithWhereUniqueWithoutUserInput | ProblemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: ProblemCreateManyUserInputEnvelope
+    set?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    disconnect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    delete?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    connect?: ProblemWhereUniqueInput | ProblemWhereUniqueInput[]
+    update?: ProblemUpdateWithWhereUniqueWithoutUserInput | ProblemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: ProblemUpdateManyWithWhereWithoutUserInput | ProblemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: ProblemScalarWhereInput | ProblemScalarWhereInput[]
+  }
+
+  export type SolvedProblemUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput> | SolvedProblemCreateWithoutUserInput[] | SolvedProblemUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutUserInput | SolvedProblemCreateOrConnectWithoutUserInput[]
+    upsert?: SolvedProblemUpsertWithWhereUniqueWithoutUserInput | SolvedProblemUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SolvedProblemCreateManyUserInputEnvelope
+    set?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    disconnect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    delete?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    update?: SolvedProblemUpdateWithWhereUniqueWithoutUserInput | SolvedProblemUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SolvedProblemUpdateManyWithWhereWithoutUserInput | SolvedProblemUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+  }
+
+  export type ProblemCreatetagsInput = {
+    set: string[]
+  }
+
+  export type ProblemCreateconstraintsInput = {
+    set: string[]
+  }
+
+  export type ProblemCreatehintsInput = {
+    set: string[]
+  }
+
+  export type UserCreateNestedOneWithoutProblemsInput = {
+    create?: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProblemsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type SolvedProblemCreateNestedManyWithoutProblemInput = {
+    create?: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput> | SolvedProblemCreateWithoutProblemInput[] | SolvedProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutProblemInput | SolvedProblemCreateOrConnectWithoutProblemInput[]
+    createMany?: SolvedProblemCreateManyProblemInputEnvelope
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+  }
+
+  export type SolvedProblemUncheckedCreateNestedManyWithoutProblemInput = {
+    create?: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput> | SolvedProblemCreateWithoutProblemInput[] | SolvedProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutProblemInput | SolvedProblemCreateOrConnectWithoutProblemInput[]
+    createMany?: SolvedProblemCreateManyProblemInputEnvelope
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+  }
+
+  export type EnumDifficultyFieldUpdateOperationsInput = {
+    set?: $Enums.Difficulty
+  }
+
+  export type ProblemUpdatetagsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProblemUpdateconstraintsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type ProblemUpdatehintsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type UserUpdateOneRequiredWithoutProblemsNestedInput = {
+    create?: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProblemsInput
+    upsert?: UserUpsertWithoutProblemsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProblemsInput, UserUpdateWithoutProblemsInput>, UserUncheckedUpdateWithoutProblemsInput>
+  }
+
+  export type SolvedProblemUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput> | SolvedProblemCreateWithoutProblemInput[] | SolvedProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutProblemInput | SolvedProblemCreateOrConnectWithoutProblemInput[]
+    upsert?: SolvedProblemUpsertWithWhereUniqueWithoutProblemInput | SolvedProblemUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: SolvedProblemCreateManyProblemInputEnvelope
+    set?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    disconnect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    delete?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    update?: SolvedProblemUpdateWithWhereUniqueWithoutProblemInput | SolvedProblemUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: SolvedProblemUpdateManyWithWhereWithoutProblemInput | SolvedProblemUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+  }
+
+  export type SolvedProblemUncheckedUpdateManyWithoutProblemNestedInput = {
+    create?: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput> | SolvedProblemCreateWithoutProblemInput[] | SolvedProblemUncheckedCreateWithoutProblemInput[]
+    connectOrCreate?: SolvedProblemCreateOrConnectWithoutProblemInput | SolvedProblemCreateOrConnectWithoutProblemInput[]
+    upsert?: SolvedProblemUpsertWithWhereUniqueWithoutProblemInput | SolvedProblemUpsertWithWhereUniqueWithoutProblemInput[]
+    createMany?: SolvedProblemCreateManyProblemInputEnvelope
+    set?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    disconnect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    delete?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    connect?: SolvedProblemWhereUniqueInput | SolvedProblemWhereUniqueInput[]
+    update?: SolvedProblemUpdateWithWhereUniqueWithoutProblemInput | SolvedProblemUpdateWithWhereUniqueWithoutProblemInput[]
+    updateMany?: SolvedProblemUpdateManyWithWhereWithoutProblemInput | SolvedProblemUpdateManyWithWhereWithoutProblemInput[]
+    deleteMany?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+  }
+
+  export type UserCreateNestedOneWithoutSolvedProblemsInput = {
+    create?: XOR<UserCreateWithoutSolvedProblemsInput, UserUncheckedCreateWithoutSolvedProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSolvedProblemsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProblemCreateNestedOneWithoutSolvedByInput = {
+    create?: XOR<ProblemCreateWithoutSolvedByInput, ProblemUncheckedCreateWithoutSolvedByInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutSolvedByInput
+    connect?: ProblemWhereUniqueInput
+  }
+
+  export type UserUpdateOneRequiredWithoutSolvedProblemsNestedInput = {
+    create?: XOR<UserCreateWithoutSolvedProblemsInput, UserUncheckedCreateWithoutSolvedProblemsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutSolvedProblemsInput
+    upsert?: UserUpsertWithoutSolvedProblemsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSolvedProblemsInput, UserUpdateWithoutSolvedProblemsInput>, UserUncheckedUpdateWithoutSolvedProblemsInput>
+  }
+
+  export type ProblemUpdateOneRequiredWithoutSolvedByNestedInput = {
+    create?: XOR<ProblemCreateWithoutSolvedByInput, ProblemUncheckedCreateWithoutSolvedByInput>
+    connectOrCreate?: ProblemCreateOrConnectWithoutSolvedByInput
+    upsert?: ProblemUpsertWithoutSolvedByInput
+    connect?: ProblemWhereUniqueInput
+    update?: XOR<XOR<ProblemUpdateToOneWithWhereWithoutSolvedByInput, ProblemUpdateWithoutSolvedByInput>, ProblemUncheckedUpdateWithoutSolvedByInput>
+  }
+
+>>>>>>> dev
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -2377,6 +6294,20 @@ export namespace Prisma {
     not?: NestedEnumUserRoleFilter<$PrismaModel> | $Enums.UserRole
   }
 
+<<<<<<< HEAD
+=======
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+>>>>>>> dev
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2405,6 +6336,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+<<<<<<< HEAD
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -2416,6 +6348,8 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+=======
+>>>>>>> dev
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -2454,6 +6388,59 @@ export namespace Prisma {
     _max?: NestedEnumUserRoleFilter<$PrismaModel>
   }
 
+<<<<<<< HEAD
+=======
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+>>>>>>> dev
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -2468,6 +6455,587 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+<<<<<<< HEAD
+=======
+  export type NestedEnumDifficultyFilter<$PrismaModel = never> = {
+    equals?: $Enums.Difficulty | EnumDifficultyFieldRefInput<$PrismaModel>
+    in?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    not?: NestedEnumDifficultyFilter<$PrismaModel> | $Enums.Difficulty
+  }
+
+  export type NestedEnumDifficultyWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Difficulty | EnumDifficultyFieldRefInput<$PrismaModel>
+    in?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    notIn?: $Enums.Difficulty[] | ListEnumDifficultyFieldRefInput<$PrismaModel>
+    not?: NestedEnumDifficultyWithAggregatesFilter<$PrismaModel> | $Enums.Difficulty
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumDifficultyFilter<$PrismaModel>
+    _max?: NestedEnumDifficultyFilter<$PrismaModel>
+  }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ProblemCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    solvedBy?: SolvedProblemCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    solvedBy?: SolvedProblemUncheckedCreateNestedManyWithoutProblemInput
+  }
+
+  export type ProblemCreateOrConnectWithoutUserInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProblemCreateManyUserInputEnvelope = {
+    data: ProblemCreateManyUserInput | ProblemCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SolvedProblemCreateWithoutUserInput = {
+    id?: string
+    solvedAt?: Date | string
+    problem: ProblemCreateNestedOneWithoutSolvedByInput
+  }
+
+  export type SolvedProblemUncheckedCreateWithoutUserInput = {
+    id?: string
+    problemId: string
+    solvedAt?: Date | string
+  }
+
+  export type SolvedProblemCreateOrConnectWithoutUserInput = {
+    where: SolvedProblemWhereUniqueInput
+    create: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput>
+  }
+
+  export type SolvedProblemCreateManyUserInputEnvelope = {
+    data: SolvedProblemCreateManyUserInput | SolvedProblemCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProblemUpsertWithWhereUniqueWithoutUserInput = {
+    where: ProblemWhereUniqueInput
+    update: XOR<ProblemUpdateWithoutUserInput, ProblemUncheckedUpdateWithoutUserInput>
+    create: XOR<ProblemCreateWithoutUserInput, ProblemUncheckedCreateWithoutUserInput>
+  }
+
+  export type ProblemUpdateWithWhereUniqueWithoutUserInput = {
+    where: ProblemWhereUniqueInput
+    data: XOR<ProblemUpdateWithoutUserInput, ProblemUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ProblemUpdateManyWithWhereWithoutUserInput = {
+    where: ProblemScalarWhereInput
+    data: XOR<ProblemUpdateManyMutationInput, ProblemUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type ProblemScalarWhereInput = {
+    AND?: ProblemScalarWhereInput | ProblemScalarWhereInput[]
+    OR?: ProblemScalarWhereInput[]
+    NOT?: ProblemScalarWhereInput | ProblemScalarWhereInput[]
+    id?: StringFilter<"Problem"> | string
+    title?: StringFilter<"Problem"> | string
+    description?: StringFilter<"Problem"> | string
+    difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    tags?: StringNullableListFilter<"Problem">
+    userId?: StringFilter<"Problem"> | string
+    examples?: JsonFilter<"Problem">
+    constraints?: StringNullableListFilter<"Problem">
+    hints?: StringNullableListFilter<"Problem">
+    editorial?: StringNullableFilter<"Problem"> | string | null
+    discussion?: JsonNullableFilter<"Problem">
+    testcases?: JsonFilter<"Problem">
+    codeSnippets?: JsonFilter<"Problem">
+    referenceSolutions?: JsonFilter<"Problem">
+    createdAt?: DateTimeFilter<"Problem"> | Date | string
+    updatedAt?: DateTimeFilter<"Problem"> | Date | string
+  }
+
+  export type SolvedProblemUpsertWithWhereUniqueWithoutUserInput = {
+    where: SolvedProblemWhereUniqueInput
+    update: XOR<SolvedProblemUpdateWithoutUserInput, SolvedProblemUncheckedUpdateWithoutUserInput>
+    create: XOR<SolvedProblemCreateWithoutUserInput, SolvedProblemUncheckedCreateWithoutUserInput>
+  }
+
+  export type SolvedProblemUpdateWithWhereUniqueWithoutUserInput = {
+    where: SolvedProblemWhereUniqueInput
+    data: XOR<SolvedProblemUpdateWithoutUserInput, SolvedProblemUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SolvedProblemUpdateManyWithWhereWithoutUserInput = {
+    where: SolvedProblemScalarWhereInput
+    data: XOR<SolvedProblemUpdateManyMutationInput, SolvedProblemUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SolvedProblemScalarWhereInput = {
+    AND?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+    OR?: SolvedProblemScalarWhereInput[]
+    NOT?: SolvedProblemScalarWhereInput | SolvedProblemScalarWhereInput[]
+    id?: StringFilter<"SolvedProblem"> | string
+    userId?: StringFilter<"SolvedProblem"> | string
+    problemId?: StringFilter<"SolvedProblem"> | string
+    solvedAt?: DateTimeFilter<"SolvedProblem"> | Date | string
+  }
+
+  export type UserCreateWithoutProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    solvedProblems?: SolvedProblemCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    solvedProblems?: SolvedProblemUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProblemsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
+  }
+
+  export type SolvedProblemCreateWithoutProblemInput = {
+    id?: string
+    solvedAt?: Date | string
+    user: UserCreateNestedOneWithoutSolvedProblemsInput
+  }
+
+  export type SolvedProblemUncheckedCreateWithoutProblemInput = {
+    id?: string
+    userId: string
+    solvedAt?: Date | string
+  }
+
+  export type SolvedProblemCreateOrConnectWithoutProblemInput = {
+    where: SolvedProblemWhereUniqueInput
+    create: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput>
+  }
+
+  export type SolvedProblemCreateManyProblemInputEnvelope = {
+    data: SolvedProblemCreateManyProblemInput | SolvedProblemCreateManyProblemInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutProblemsInput = {
+    update: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
+    create: XOR<UserCreateWithoutProblemsInput, UserUncheckedCreateWithoutProblemsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProblemsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProblemsInput, UserUncheckedUpdateWithoutProblemsInput>
+  }
+
+  export type UserUpdateWithoutProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedProblems?: SolvedProblemUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedProblems?: SolvedProblemUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SolvedProblemUpsertWithWhereUniqueWithoutProblemInput = {
+    where: SolvedProblemWhereUniqueInput
+    update: XOR<SolvedProblemUpdateWithoutProblemInput, SolvedProblemUncheckedUpdateWithoutProblemInput>
+    create: XOR<SolvedProblemCreateWithoutProblemInput, SolvedProblemUncheckedCreateWithoutProblemInput>
+  }
+
+  export type SolvedProblemUpdateWithWhereUniqueWithoutProblemInput = {
+    where: SolvedProblemWhereUniqueInput
+    data: XOR<SolvedProblemUpdateWithoutProblemInput, SolvedProblemUncheckedUpdateWithoutProblemInput>
+  }
+
+  export type SolvedProblemUpdateManyWithWhereWithoutProblemInput = {
+    where: SolvedProblemScalarWhereInput
+    data: XOR<SolvedProblemUpdateManyMutationInput, SolvedProblemUncheckedUpdateManyWithoutProblemInput>
+  }
+
+  export type UserCreateWithoutSolvedProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutSolvedProblemsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    image?: string | null
+    role?: $Enums.UserRole
+    password: string
+    coins?: number
+    streak?: number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    problems?: ProblemUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutSolvedProblemsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutSolvedProblemsInput, UserUncheckedCreateWithoutSolvedProblemsInput>
+  }
+
+  export type ProblemCreateWithoutSolvedByInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutProblemsInput
+  }
+
+  export type ProblemUncheckedCreateWithoutSolvedByInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    userId: string
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProblemCreateOrConnectWithoutSolvedByInput = {
+    where: ProblemWhereUniqueInput
+    create: XOR<ProblemCreateWithoutSolvedByInput, ProblemUncheckedCreateWithoutSolvedByInput>
+  }
+
+  export type UserUpsertWithoutSolvedProblemsInput = {
+    update: XOR<UserUpdateWithoutSolvedProblemsInput, UserUncheckedUpdateWithoutSolvedProblemsInput>
+    create: XOR<UserCreateWithoutSolvedProblemsInput, UserUncheckedCreateWithoutSolvedProblemsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutSolvedProblemsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutSolvedProblemsInput, UserUncheckedUpdateWithoutSolvedProblemsInput>
+  }
+
+  export type UserUpdateWithoutSolvedProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutSolvedProblemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumUserRoleFieldUpdateOperationsInput | $Enums.UserRole
+    password?: StringFieldUpdateOperationsInput | string
+    coins?: IntFieldUpdateOperationsInput | number
+    streak?: IntFieldUpdateOperationsInput | number
+    badges?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problems?: ProblemUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type ProblemUpsertWithoutSolvedByInput = {
+    update: XOR<ProblemUpdateWithoutSolvedByInput, ProblemUncheckedUpdateWithoutSolvedByInput>
+    create: XOR<ProblemCreateWithoutSolvedByInput, ProblemUncheckedCreateWithoutSolvedByInput>
+    where?: ProblemWhereInput
+  }
+
+  export type ProblemUpdateToOneWithWhereWithoutSolvedByInput = {
+    where?: ProblemWhereInput
+    data: XOR<ProblemUpdateWithoutSolvedByInput, ProblemUncheckedUpdateWithoutSolvedByInput>
+  }
+
+  export type ProblemUpdateWithoutSolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutProblemsNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutSolvedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    userId?: StringFieldUpdateOperationsInput | string
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProblemCreateManyUserInput = {
+    id?: string
+    title: string
+    description: string
+    difficultyLevel: $Enums.Difficulty
+    tags?: ProblemCreatetagsInput | string[]
+    examples: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemCreateconstraintsInput | string[]
+    hints?: ProblemCreatehintsInput | string[]
+    editorial?: string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases: JsonNullValueInput | InputJsonValue
+    codeSnippets: JsonNullValueInput | InputJsonValue
+    referenceSolutions: JsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SolvedProblemCreateManyUserInput = {
+    id?: string
+    problemId: string
+    solvedAt?: Date | string
+  }
+
+  export type ProblemUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedBy?: SolvedProblemUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    solvedBy?: SolvedProblemUncheckedUpdateManyWithoutProblemNestedInput
+  }
+
+  export type ProblemUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    tags?: ProblemUpdatetagsInput | string[]
+    examples?: JsonNullValueInput | InputJsonValue
+    constraints?: ProblemUpdateconstraintsInput | string[]
+    hints?: ProblemUpdatehintsInput | string[]
+    editorial?: NullableStringFieldUpdateOperationsInput | string | null
+    discussion?: NullableJsonNullValueInput | InputJsonValue
+    testcases?: JsonNullValueInput | InputJsonValue
+    codeSnippets?: JsonNullValueInput | InputJsonValue
+    referenceSolutions?: JsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    problem?: ProblemUpdateOneRequiredWithoutSolvedByNestedInput
+  }
+
+  export type SolvedProblemUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    problemId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemCreateManyProblemInput = {
+    id?: string
+    userId: string
+    solvedAt?: Date | string
+  }
+
+  export type SolvedProblemUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutSolvedProblemsNestedInput
+  }
+
+  export type SolvedProblemUncheckedUpdateWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SolvedProblemUncheckedUpdateManyWithoutProblemInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    solvedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+>>>>>>> dev
 
 
   /**

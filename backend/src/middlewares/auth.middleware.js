@@ -51,4 +51,29 @@ export const authMiddleware = async (req, res, next) => {
       return res.status(500).json({ message: "Token verification failed" });
     }
   };
+
+  export const isAdmin = async (req, res, next) => {
+   try{
+    const userId = req.user.id;
+    const user = await db.user.findUnique({
+      where: {
+        id: userId,
+      },
+      select: {
+        role: true,
+      }
+    });
+   if (!user) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    if (user.role !== "ADMIN") {
+      return res.status(403).json({ message: "Access denied for non-admin users" });
+    }
+    next();
+   }
+    catch(error){
+      console.error("Error in isAdmin middleware:", error);
+      return res.status(500).json({ message: "Internal server error" });
+    }
+  };
   
