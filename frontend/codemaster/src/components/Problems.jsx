@@ -73,13 +73,12 @@ export default function Problems() {
             const acceptanceRate = totalAttempts > 0 
               ? ((problem.solvedByCount || 0) / totalAttempts) * 100 
               : 0;
-            console.log(currentUserId);
             const isSolved = problem.solvedBy?.some(solution => solution.userId === currentUserId) || false;
-            console.log(isSolved);
             return {
               id: problem.id,
               title: problem.title,
               difficulty: problem.difficultyLevel || 'Easy',
+              category: problem.category || 'Uncategorized',
               acceptance: acceptanceRate,
               isPremium: problem.isPremium || false,
               isSolved: isSolved,
@@ -113,7 +112,7 @@ export default function Problems() {
   const filteredProblems = problems.filter((problem) => {
     const matchesSearch = problem.title.toLowerCase().includes(search.toLowerCase());
     const matchesDifficulty = difficulty === 'All' || problem.difficulty.toUpperCase() === difficulty.toUpperCase();
-    const matchesCategory = category === 'All' || problem.tags?.includes(category);
+    const matchesCategory = category === 'All' || problem.category === category;
     return matchesSearch && matchesDifficulty && matchesCategory;
   });
 
@@ -202,6 +201,7 @@ export default function Problems() {
                   >
                     {problem.difficulty}
                   </span>
+                  <span className="text-sm text-gray-400">Category: {problem.category}</span>
                   <span className="text-sm text-gray-400">Acceptance: {problem.acceptance.toFixed(1)}%</span>
                   <div className="flex flex-wrap gap-2">
                     {Array.isArray(problem.tags) && problem.tags.map((tag, index) => (
@@ -228,6 +228,7 @@ export default function Problems() {
                           id: problem.id,
                           title: problem.title,
                           difficulty: problem.difficulty,
+                          category: problem.category,
                           description: problem.description,
                           examples: problem.examples,
                           constraints: problem.constraints,
@@ -253,6 +254,7 @@ export default function Problems() {
                         id: problem.id,
                         title: problem.title,
                         difficulty: problem.difficulty,
+                        category: problem.category,
                         description: problem.description,
                         examples: problem.examples,
                         constraints: problem.constraints,

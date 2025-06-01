@@ -10,6 +10,7 @@ export const createProblem = async (req, res) => {
     title,
     description,
     difficultyLevel,
+    category,
     tags,
     examples,
     constraints,
@@ -17,7 +18,7 @@ export const createProblem = async (req, res) => {
     codeSnippets,
     referenceSolutions,
     hints,
-    discussion, // New field
+    discussion,
   } = req.body;
 
   if (!testcases || testcases.length === 0) {
@@ -26,6 +27,9 @@ export const createProblem = async (req, res) => {
   if (!Array.isArray(constraints) || !constraints.every((c) => typeof c === "string")) {
     return res.status(400).json({ error: "Constraints must be an array of strings" });
   } 
+  if (!category) {
+    return res.status(400).json({ error: "Category is required" });
+  }
 
   try {
     for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
@@ -79,6 +83,7 @@ export const createProblem = async (req, res) => {
         title,
         description,
         difficultyLevel,
+        category,
         tags,
         examples,
         constraints,
@@ -86,7 +91,7 @@ export const createProblem = async (req, res) => {
         codeSnippets,
         referenceSolutions,
         hints,
-        discussion, // Save the discussion field
+        discussion,
         userId: req.user.id,
       },
     });
@@ -170,6 +175,7 @@ export const updateProblemById = async (req, res) => {
     title,
     description,
     difficultyLevel,
+    category,
     tags,
     examples,
     constraints,
@@ -177,7 +183,7 @@ export const updateProblemById = async (req, res) => {
     codeSnippets,
     referenceSolutions,
     hints,
-    discussion, // New field
+    discussion,
   } = req.body;
 
   try {
@@ -198,6 +204,7 @@ export const updateProblemById = async (req, res) => {
         title,
         description,
         difficultyLevel,
+        category,
         tags,
         examples,
         constraints,
@@ -205,7 +212,7 @@ export const updateProblemById = async (req, res) => {
         codeSnippets,
         referenceSolutions,
         hints,
-        discussion, // Update the discussion field
+        discussion,
       },
     });
     return res.status(200).json({
@@ -297,8 +304,6 @@ export const deleteProblemById = async (req, res) => {
   }
 }
 
-
-
 export const getProblemByDifficulty = async (req, res) => {
   const { difficulty } = req.params;
 
@@ -323,6 +328,7 @@ export const getProblemByDifficulty = async (req, res) => {
     return res.status(500).json({ error: "Failed to fetch problems by difficulty level." });
   }
 };
+
 export const getProblemByTag = async (req, res) => {
   const { tag } = req.params;
 
@@ -382,5 +388,204 @@ export const getProblemsByCategories = async (req, res) => {
   } catch (error) {
     console.error("Error fetching problems by categories:", error);
     return res.status(500).json({ error: "Failed to fetch problems by categories." });
+  }
+};
+
+export const getProblemByCategory = async (req, res) => {
+  const { category } = req.params;
+
+  try {
+    const problems = await db.problem.findMany({
+      where: {
+        category: category,
+      },
+    });
+
+    if (!problems || problems.length === 0) {
+      return res.status(404).json({ error: "No problems found with the specified category." });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Problems fetched successfully by category.",
+      problems,
+    });
+  } catch (error) {
+    console.error("Error fetching problems by category:", error);
+    return res.status(500).json({ error: "Failed to fetch problems by category." });
+  }
+};
+
+export const bulkUploadProblems = async (req, res) => {
+  const { problems } = req.body;
+
+  if (!Array.isArray(problems) || problems.length === 0) {
+    return res.status(400).json({ error: "Invalid input. Please provide an array of problems." });
+  }
+
+  const results = {
+    successful: [],
+    failed: []
+  };
+
+  try {
+    // Process each problem in the array
+    for (const problem of problems) {
+      const {
+        title,
+        description,
+        difficultyLevel,
+        category,
+        tags,
+        examples,
+        constraints,
+        testcases,
+        codeSnippets,
+        referenceSolutions,
+        hints,
+        discussion,
+      } = problem;
+
+      // Validate required fields
+      if (!title || !description || !difficultyLevel || !category || !testcases || !Array.isArray(constraints)) {
+        results.failed.push({
+          title: title || 'Untitled',
+          error: "Missing required fields"
+        });
+        continue;
+      }
+
+      try {
+        // Validate test cases for each language
+        for (const [language, solutionCode] of Object.entries(referenceSolutions)) {
+          if (!solutionCode) {
+            results.failed.push({
+              title,
+              error: `Solution code for ${language} is missing`
+            });
+            continue;
+          }
+
+          const languageId = getCustomLanguageId(language);
+          if (!languageId) {
+            results.failed.push({
+              title,
+              error: `Language ${language} is not supported`
+            });
+            continue;
+          }
+
+          const submissions = testcases.map(({ input, output }) => ({
+            source_code: solutionCode,
+            language_id: languageId,
+            stdin: input,
+            expected_output: output,
+          }));
+
+          const submissionResults = await submitBatch(submissions);
+          const tokens = submissionResults.map((res) => res.token);
+          const results = await pollBatchResults(tokens);
+
+          // Check if all results have a status of "Completed"
+          for (let i = 0; i < results.length; i++) {
+            const result = results[i];
+            if (result.status !== "Completed") {
+              results.failed.push({
+                title,
+                error: `Testcase ${i + 1} failed for language ${language}. Status: ${result.status}`
+              });
+              continue;
+            }
+          }
+        }
+
+        // If all validations pass, create the problem
+        const newProblem = await db.problem.create({
+          data: {
+            title,
+            description,
+            difficultyLevel,
+            category,
+            tags,
+            examples,
+            constraints,
+            testcases,
+            codeSnippets,
+            referenceSolutions,
+            hints,
+            discussion,
+            userId: req.user.id,
+          },
+        });
+
+        results.successful.push({
+          title,
+          id: newProblem.id
+        });
+
+      } catch (error) {
+        results.failed.push({
+          title,
+          error: error.message
+        });
+      }
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Bulk upload completed",
+      results: {
+        total: problems.length,
+        successful: results.successful.length,
+        failed: results.failed.length,
+        successfulProblems: results.successful,
+        failedProblems: results.failed
+      }
+    });
+
+  } catch (error) {
+    console.error("Error during bulk upload:", error);
+    return res.status(500).json({
+      error: "Error during bulk upload",
+      details: error.message
+    });
+  }
+};
+
+export const bulkDeleteProblems = async (req, res) => {
+  try {
+    // First, get the count of problems before deletion
+    const problemCount = await db.problem.count();
+
+    if (problemCount === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No problems found in the database"
+      });
+    }
+
+    // Delete all problems using Prisma's deleteMany
+    // This will also cascade delete related records due to our schema configuration
+    const deleteResult = await db.problem.deleteMany({});
+
+    // Get the count of problems after deletion
+    const remainingCount = await db.problem.count();
+
+    return res.status(200).json({
+      success: true,
+      message: "All problems deleted successfully",
+      results: {
+        deletedCount: deleteResult.count,
+        remainingCount: remainingCount
+      }
+    });
+
+  } catch (error) {
+    console.error("Error during bulk deletion:", error);
+    return res.status(500).json({
+      success: false,
+      error: "Error during bulk deletion",
+      details: error.message
+    });
   }
 };

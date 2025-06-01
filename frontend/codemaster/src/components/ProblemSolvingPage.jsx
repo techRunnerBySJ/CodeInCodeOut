@@ -136,6 +136,9 @@ export default function ProblemSolvingPage() {
                 }`}>
                   {problemData.difficulty}
                 </span>
+                <span className="text-xs px-2 py-1 rounded-full ml-2 bg-blue-600">
+                  {problemData.category}
+                </span>
               </h2>
             </div>
 

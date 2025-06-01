@@ -2376,6 +2376,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     difficultyLevel: $Enums.Difficulty | null
+    category: string | null
     userId: string | null
     editorial: string | null
     createdAt: Date | null
@@ -2387,6 +2388,7 @@ export namespace Prisma {
     title: string | null
     description: string | null
     difficultyLevel: $Enums.Difficulty | null
+    category: string | null
     userId: string | null
     editorial: string | null
     createdAt: Date | null
@@ -2398,6 +2400,7 @@ export namespace Prisma {
     title: number
     description: number
     difficultyLevel: number
+    category: number
     tags: number
     userId: number
     examples: number
@@ -2419,6 +2422,7 @@ export namespace Prisma {
     title?: true
     description?: true
     difficultyLevel?: true
+    category?: true
     userId?: true
     editorial?: true
     createdAt?: true
@@ -2430,6 +2434,7 @@ export namespace Prisma {
     title?: true
     description?: true
     difficultyLevel?: true
+    category?: true
     userId?: true
     editorial?: true
     createdAt?: true
@@ -2441,6 +2446,7 @@ export namespace Prisma {
     title?: true
     description?: true
     difficultyLevel?: true
+    category?: true
     tags?: true
     userId?: true
     examples?: true
@@ -2533,6 +2539,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags: string[]
     userId: string
     examples: JsonValue
@@ -2569,6 +2576,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     difficultyLevel?: boolean
+    category?: boolean
     tags?: boolean
     userId?: boolean
     examples?: boolean
@@ -2591,6 +2599,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     difficultyLevel?: boolean
+    category?: boolean
     tags?: boolean
     userId?: boolean
     examples?: boolean
@@ -2611,6 +2620,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     difficultyLevel?: boolean
+    category?: boolean
     tags?: boolean
     userId?: boolean
     examples?: boolean
@@ -2631,6 +2641,7 @@ export namespace Prisma {
     title?: boolean
     description?: boolean
     difficultyLevel?: boolean
+    category?: boolean
     tags?: boolean
     userId?: boolean
     examples?: boolean
@@ -2645,7 +2656,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficultyLevel" | "tags" | "userId" | "examples" | "constraints" | "hints" | "editorial" | "discussion" | "testcases" | "codeSnippets" | "referenceSolutions" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
+  export type ProblemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "difficultyLevel" | "category" | "tags" | "userId" | "examples" | "constraints" | "hints" | "editorial" | "discussion" | "testcases" | "codeSnippets" | "referenceSolutions" | "createdAt" | "updatedAt", ExtArgs["result"]["problem"]>
   export type ProblemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     solvedBy?: boolean | Problem$solvedByArgs<ExtArgs>
@@ -2669,6 +2680,7 @@ export namespace Prisma {
       title: string
       description: string
       difficultyLevel: $Enums.Difficulty
+      category: string
       tags: string[]
       userId: string
       examples: Prisma.JsonValue
@@ -3110,6 +3122,7 @@ export namespace Prisma {
     readonly title: FieldRef<"Problem", 'String'>
     readonly description: FieldRef<"Problem", 'String'>
     readonly difficultyLevel: FieldRef<"Problem", 'Difficulty'>
+    readonly category: FieldRef<"Problem", 'String'>
     readonly tags: FieldRef<"Problem", 'String[]'>
     readonly userId: FieldRef<"Problem", 'String'>
     readonly examples: FieldRef<"Problem", 'Json'>
@@ -4649,6 +4662,7 @@ export namespace Prisma {
     title: 'title',
     description: 'description',
     difficultyLevel: 'difficultyLevel',
+    category: 'category',
     tags: 'tags',
     userId: 'userId',
     examples: 'examples',
@@ -4928,6 +4942,7 @@ export namespace Prisma {
     title?: StringFilter<"Problem"> | string
     description?: StringFilter<"Problem"> | string
     difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    category?: StringFilter<"Problem"> | string
     tags?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
@@ -4949,6 +4964,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     difficultyLevel?: SortOrder
+    category?: SortOrder
     tags?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
@@ -4973,6 +4989,7 @@ export namespace Prisma {
     title?: StringFilter<"Problem"> | string
     description?: StringFilter<"Problem"> | string
     difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    category?: StringFilter<"Problem"> | string
     tags?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
@@ -4994,6 +5011,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     difficultyLevel?: SortOrder
+    category?: SortOrder
     tags?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
@@ -5019,6 +5037,7 @@ export namespace Prisma {
     title?: StringWithAggregatesFilter<"Problem"> | string
     description?: StringWithAggregatesFilter<"Problem"> | string
     difficultyLevel?: EnumDifficultyWithAggregatesFilter<"Problem"> | $Enums.Difficulty
+    category?: StringWithAggregatesFilter<"Problem"> | string
     tags?: StringNullableListFilter<"Problem">
     userId?: StringWithAggregatesFilter<"Problem"> | string
     examples?: JsonWithAggregatesFilter<"Problem">
@@ -5197,6 +5216,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints?: ProblemCreateconstraintsInput | string[]
@@ -5217,6 +5237,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
@@ -5237,6 +5258,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]
@@ -5257,6 +5279,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
@@ -5277,6 +5300,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
@@ -5296,6 +5320,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]
@@ -5314,6 +5339,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
@@ -5682,6 +5708,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     difficultyLevel?: SortOrder
+    category?: SortOrder
     tags?: SortOrder
     userId?: SortOrder
     examples?: SortOrder
@@ -5701,6 +5728,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     difficultyLevel?: SortOrder
+    category?: SortOrder
     userId?: SortOrder
     editorial?: SortOrder
     createdAt?: SortOrder
@@ -5712,6 +5740,7 @@ export namespace Prisma {
     title?: SortOrder
     description?: SortOrder
     difficultyLevel?: SortOrder
+    category?: SortOrder
     userId?: SortOrder
     editorial?: SortOrder
     createdAt?: SortOrder
@@ -6224,6 +6253,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints?: ProblemCreateconstraintsInput | string[]
@@ -6243,6 +6273,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints?: ProblemCreateconstraintsInput | string[]
@@ -6313,6 +6344,7 @@ export namespace Prisma {
     title?: StringFilter<"Problem"> | string
     description?: StringFilter<"Problem"> | string
     difficultyLevel?: EnumDifficultyFilter<"Problem"> | $Enums.Difficulty
+    category?: StringFilter<"Problem"> | string
     tags?: StringNullableListFilter<"Problem">
     userId?: StringFilter<"Problem"> | string
     examples?: JsonFilter<"Problem">
@@ -6507,6 +6539,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints?: ProblemCreateconstraintsInput | string[]
@@ -6526,6 +6559,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     userId: string
     examples: JsonNullValueInput | InputJsonValue
@@ -6602,6 +6636,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]
@@ -6621,6 +6656,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     userId?: StringFieldUpdateOperationsInput | string
     examples?: JsonNullValueInput | InputJsonValue
@@ -6640,6 +6676,7 @@ export namespace Prisma {
     title: string
     description: string
     difficultyLevel: $Enums.Difficulty
+    category: string
     tags?: ProblemCreatetagsInput | string[]
     examples: JsonNullValueInput | InputJsonValue
     constraints?: ProblemCreateconstraintsInput | string[]
@@ -6664,6 +6701,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]
@@ -6683,6 +6721,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]
@@ -6702,6 +6741,7 @@ export namespace Prisma {
     title?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
     difficultyLevel?: EnumDifficultyFieldUpdateOperationsInput | $Enums.Difficulty
+    category?: StringFieldUpdateOperationsInput | string
     tags?: ProblemUpdatetagsInput | string[]
     examples?: JsonNullValueInput | InputJsonValue
     constraints?: ProblemUpdateconstraintsInput | string[]

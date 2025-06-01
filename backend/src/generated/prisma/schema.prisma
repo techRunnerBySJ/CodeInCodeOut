@@ -42,6 +42,7 @@ model Problem {
   title           String
   description     String
   difficultyLevel Difficulty
+  category        String
   tags            String[]
   userId          String
   examples        Json
